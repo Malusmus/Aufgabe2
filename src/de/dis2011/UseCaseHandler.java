@@ -30,7 +30,7 @@ public interface UseCaseHandler {
 	
 	public void insertPerson();
 	
-	public ArrayList<contract> getAllContracts();
+	public ArrayList<Contract> getAllContracts();
 	
 	
 }
