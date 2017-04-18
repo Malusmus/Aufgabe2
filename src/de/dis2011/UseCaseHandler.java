@@ -1,6 +1,7 @@
 package de.dis2011;
 
 import java.util.Date;
+import java.util.ArrayList;
 
 public interface UseCaseHandler {
 	
@@ -22,7 +23,7 @@ public interface UseCaseHandler {
 
 	public void updateHouse(int id, int floors, int price, boolean garden);
 
-	public void createContactGeneral(int number, Estate e, Date d, Place p);
+	public void createContactGeneral(int number, Estate e, Date d, String p);
 	
 	public void createTenancyContactSpecifics(int number, Date startDate, Date duration, int additionalCosts);
 	
