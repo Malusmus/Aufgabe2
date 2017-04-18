@@ -5,28 +5,40 @@
  */
 package de.dis2011.data;
 
+import java.util.Date;
+
 /**
  *
  * @author aossa
  */
 public class Contract {
 
-    private java.util.Date Date;
-    private String Place;
+    private int contractNo;
+    private Date date;
+    private String place;
 
-    public java.util.Date getDate() {
-        return Date;
+    public int getContractNo() {
+        return contractNo;
     }
 
-    public void setDate(java.util.Date Date) {
-        this.Date = Date;
+    public void setContractNo(int contractNo) {
+        this.contractNo = contractNo;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public String getPlace() {
-        return Place;
+        return place;
     }
 
-    public void setPlace(String Place) {
-        this.Place = Place;
+    public void setPlace(String place) {
+        this.place = place;
     }
+
 }

@@ -5,37 +5,49 @@
  */
 package de.dis2011.data;
 
+import java.util.Date;
+
 /**
  *
  * @author aossa
  */
 public class TenancyContract {
 
-    private java.util.Date StartDate;
-    private java.util.Date Duration;
-    private double AdditionalCosts;
+    private int contractNo;
+    private Date startDate;
+    private Date duration;
+    private double additionalCosts;
 
-    public java.util.Date getStartdate() {
-        return StartDate;
+    public int getContractNo() {
+        return contractNo;
     }
 
-    public void setStartdate(java.util.Date StartDate) {
-        this.StartDate = StartDate;
+    public void setContractNo(int contractNo) {
+        this.contractNo = contractNo;
     }
 
-    public java.util.Date getDuration() {
-        return Duration;
+    public Date getStartDate() {
+        return startDate;
     }
 
-    public void setDuration(java.util.Date Duration) {
-        this.Duration = Duration;
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
 
-    public double getAdditionalcosts() {
-        return AdditionalCosts;
+    public Date getDuration() {
+        return duration;
     }
 
-    public void setAdditionalcosts(double AdditionalCosts) {
-        this.AdditionalCosts = AdditionalCosts;
+    public void setDuration(Date duration) {
+        this.duration = duration;
     }
+
+    public double getAdditionalCosts() {
+        return additionalCosts;
+    }
+
+    public void setAdditionalCosts(double additionalCosts) {
+        this.additionalCosts = additionalCosts;
+    }
+
 }

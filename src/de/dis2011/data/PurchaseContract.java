@@ -11,22 +11,32 @@ package de.dis2011.data;
  */
 public class PurchaseContract {
 
+    private int contractNo;
     private int NoOfInstallments;
     private double InterestRate;
 
-    public int getNoofinstallments() {
+    public int getContractNo() {
+        return contractNo;
+    }
+
+    public void setContractNo(int contractNo) {
+        this.contractNo = contractNo;
+    }
+
+    public int getNoOfInstallments() {
         return NoOfInstallments;
     }
 
-    public void setNoofinstallments(int NoOfInstallments) {
+    public void setNoOfInstallments(int NoOfInstallments) {
         this.NoOfInstallments = NoOfInstallments;
     }
 
-    public double getInterestrate() {
+    public double getInterestRate() {
         return InterestRate;
     }
 
-    public void setInterestrate(double InterestRate) {
+    public void setInterestRate(double InterestRate) {
         this.InterestRate = InterestRate;
     }
+
 }

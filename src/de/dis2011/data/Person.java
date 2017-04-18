@@ -11,31 +11,41 @@ package de.dis2011.data;
  */
 public class Person {
 
-    private String FirstName;
-    private String Name;
-    private String Address;
+    private int id;
+    private String firstName;
+    private String name;
+    private String address;
 
-    public String getFirstname() {
-        return FirstName;
+    public int getId() {
+        return id;
     }
 
-    public void setFirstname(String FirstName) {
-        this.FirstName = FirstName;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
-    public void setName(String Name) {
-        this.Name = Name;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getAddress() {
-        return Address;
+        return address;
     }
 
-    public void setAddress(String Address) {
-        this.Address = Address;
+    public void setAddress(String address) {
+        this.address = address;
     }
+
 }

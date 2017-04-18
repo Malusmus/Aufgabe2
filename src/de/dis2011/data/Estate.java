@@ -11,58 +11,68 @@ package de.dis2011.data;
  */
 public class Estate {
 
-    private int EstateAgentId;
-    private String City;
-    private String PostalCode;
-    private String Street;
-    private String StreetNumber;
-    private double SquareArea;
+    private int id;
+    private int estateAgentId;
+    private String city;
+    private String postalCode;
+    private String street;
+    private String streetNumber;
+    private double squareArea;
 
-    public int getEstateagentid() {
-        return EstateAgentId;
+    public int getId() {
+        return id;
     }
 
-    public void setEstateagentid(int EstateAgentId) {
-        this.EstateAgentId = EstateAgentId;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getEstateAgentId() {
+        return estateAgentId;
+    }
+
+    public void setEstateAgentId(int estateAgentId) {
+        this.estateAgentId = estateAgentId;
     }
 
     public String getCity() {
-        return City;
+        return city;
     }
 
-    public void setCity(String City) {
-        this.City = City;
+    public void setCity(String city) {
+        this.city = city;
     }
 
-    public String getPostalcode() {
-        return PostalCode;
+    public String getPostalCode() {
+        return postalCode;
     }
 
-    public void setPostalcode(String PostalCode) {
-        this.PostalCode = PostalCode;
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
     }
 
     public String getStreet() {
-        return Street;
+        return street;
     }
 
-    public void setStreet(String Street) {
-        this.Street = Street;
+    public void setStreet(String street) {
+        this.street = street;
     }
 
-    public String getStreetnumber() {
-        return StreetNumber;
+    public String getStreetNumber() {
+        return streetNumber;
     }
 
-    public void setStreetnumber(String StreetNumber) {
-        this.StreetNumber = StreetNumber;
+    public void setStreetNumber(String streetNumber) {
+        this.streetNumber = streetNumber;
     }
 
-    public double getSquarearea() {
-        return SquareArea;
+    public double getSquareArea() {
+        return squareArea;
     }
 
-    public void setSquarearea(double SquareArea) {
-        this.SquareArea = SquareArea;
+    public void setSquareArea(double squareArea) {
+        this.squareArea = squareArea;
     }
+
 }

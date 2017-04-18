@@ -11,31 +11,60 @@ package de.dis2011.data;
  */
 public class Apartment {
 
-    private int Floor;
-    private int Rent;
-    private int Rooms;
+    private int estateId;
+    private int floor;
+    private int rent;
+    private int rooms;
 
-    public int getFloor() {
-        return Floor;
+    private boolean hasBalcony;
+    private boolean builtInKitchen;
+
+    public int getEstateId() {
+        return estateId;
     }
 
-    public void setFloor(int Floor) {
-        this.Floor = Floor;
+    public void setEstateId(int estateId) {
+        this.estateId = estateId;
+    }
+
+    public int getFloor() {
+        return floor;
+    }
+
+    public void setFloor(int floor) {
+        this.floor = floor;
     }
 
     public int getRent() {
-        return Rent;
+        return rent;
     }
 
-    public void setRent(int Rent) {
-        this.Rent = Rent;
+    public void setRent(int rent) {
+        this.rent = rent;
     }
 
     public int getRooms() {
-        return Rooms;
+        return rooms;
     }
 
-    public void setRooms(int Rooms) {
-        this.Rooms = Rooms;
+    public void setRooms(int rooms) {
+        this.rooms = rooms;
     }
+
+    public boolean isHasBalcony() {
+        return hasBalcony;
+    }
+
+    public void setHasBalcony(boolean hasBalcony) {
+        this.hasBalcony = hasBalcony;
+    }
+
+    public boolean isBuiltInKitchen() {
+        return builtInKitchen;
+    }
+
+    public void setBuiltInKitchen(boolean builtInKitchen) {
+        this.builtInKitchen = builtInKitchen;
+    }
+
 }

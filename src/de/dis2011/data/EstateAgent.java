@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package de.dis2011.data;
 
 /**
@@ -11,40 +6,50 @@ package de.dis2011.data;
  */
 public class EstateAgent {
 
-    private String Name;
-    private String Address;
-    private String Login;
-    private String Password;
+    private int estateAgentId;
+    private String name;
+    private String address;
+    private String login;
+    private String password;
 
-    public String getName() {
-        return Name;
+    public int getEstateAgentId() {
+        return estateAgentId;
     }
 
-    public void setName(String Name) {
-        this.Name = Name;
+    public void setEstateAgentId(int estateAgentId) {
+        this.estateAgentId = estateAgentId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getAddress() {
-        return Address;
+        return address;
     }
 
-    public void setAddress(String Address) {
-        this.Address = Address;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getLogin() {
-        return Login;
+        return login;
     }
 
-    public void setLogin(String Login) {
-        this.Login = Login;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public String getPassword() {
-        return Password;
+        return password;
     }
 
-    public void setPassword(String Password) {
-        this.Password = Password;
+    public void setPassword(String password) {
+        this.password = password;
     }
+
 }

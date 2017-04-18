@@ -11,22 +11,32 @@ package de.dis2011.data;
  */
 public class Rents {
 
-    private int PersonId;
-    private int TenancyContractNo;
+    private int apartmentId;
+    private int personId;
+    private int tenancyContractNo;
 
-    public int getPersonid() {
-        return PersonId;
+    public int getApartmentId() {
+        return apartmentId;
     }
 
-    public void setPersonid(int PersonId) {
-        this.PersonId = PersonId;
+    public void setApartmentId(int apartmentId) {
+        this.apartmentId = apartmentId;
     }
 
-    public int getTenancycontractno() {
-        return TenancyContractNo;
+    public int getPersonId() {
+        return personId;
     }
 
-    public void setTenancycontractno(int TenancyContractNo) {
-        this.TenancyContractNo = TenancyContractNo;
+    public void setPersonId(int personId) {
+        this.personId = personId;
     }
+
+    public int getTenancyContractNo() {
+        return tenancyContractNo;
+    }
+
+    public void setTenancyContractNo(int tenancyContractNo) {
+        this.tenancyContractNo = tenancyContractNo;
+    }
+
 }

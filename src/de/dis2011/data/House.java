@@ -11,22 +11,41 @@ package de.dis2011.data;
  */
 public class House {
 
-    private int Floors;
-    private int Price;
+    private int estateId;
+    private int floors;
+    private int price;
+    private boolean hasGarden;
 
-    public int getFloors() {
-        return Floors;
+    public int getEstateId() {
+        return estateId;
     }
 
-    public void setFloors(int Floors) {
-        this.Floors = Floors;
+    public void setEstateId(int estateId) {
+        this.estateId = estateId;
+    }
+
+    public int getFloors() {
+        return floors;
+    }
+
+    public void setFloors(int floors) {
+        this.floors = floors;
     }
 
     public int getPrice() {
-        return Price;
+        return price;
     }
 
-    public void setPrice(int Price) {
-        this.Price = Price;
+    public void setPrice(int price) {
+        this.price = price;
     }
+
+    public boolean isHasGarden() {
+        return hasGarden;
+    }
+
+    public void setHasGarden(boolean hasGarden) {
+        this.hasGarden = hasGarden;
+    }
+
 }
