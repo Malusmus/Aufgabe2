@@ -25,13 +25,20 @@ public interface UseCaseHandler {
 
 	public void createContactGeneral(int number, Estate e, Date d, String p);
 	
-	public void createTenancyContactSpecifics(int number, Date startDate, Date duration, int additionalCosts);
+	public void createTenancyContactSpecifics(int number, int estateNumber, Date startDate, Date duration, int additionalCosts);
 	
-	public void createPurchaseContractSpecifics(int number, int numberInstallments, int interestRate);
+	public void createPurchaseContractSpecifics(int number, int estateNumber, int numberInstallments, int interestRate);
+	
+	public void updateContactGeneral(int number, Estate e, Date d, String p);
+	
+	public void updateTenancyContactSpecifics(int number, int estateNumber, Date startDate, Date duration, int additionalCosts);
+	
+	public void updatePurchaseContractSpecifics(int number, int estateNumber, int numberInstallments, int interestRate);
 	
 	public void insertPerson();
 	
 	public ArrayList<Contract> getAllContracts();
 	
+	public ArrayList<Estate> getAllEstates();
 	
 }
