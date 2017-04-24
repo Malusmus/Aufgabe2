@@ -25,4 +25,8 @@ public interface UseCaseHandler {
 	public ArrayList<EstateAgent> getEstateAgents();
 
 	public void fireEstateAgent(int ID);
+	
+	public void createPerson(String name, String vorname, String adresse);
+
+	public ArrayList<Person> getPersonen();
 }
