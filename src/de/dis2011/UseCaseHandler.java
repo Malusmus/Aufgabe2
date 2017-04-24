@@ -18,17 +18,34 @@ import java.util.ArrayList;
 
 public interface UseCaseHandler {
 
-	public boolean checkPasswordForMakler(String login, String maklerPassword);
+    public boolean checkPasswordForMakler(String login, String maklerPassword);
 
-	public void createAccount(String login, String maklerName, String address, String maklerPassword);
+    public void createAccount(String login, String maklerName, String address, String maklerPassword);
 
-	public ArrayList<EstateAgent> getEstateAgents();
+    public ArrayList<EstateAgent> getEstateAgents();
 
-	public void fireEstateAgent(int ID);
-	
-	public void createPerson(String name, String vorname, String adresse);
+    public void fireEstateAgent(int ID);
 
-	public ArrayList<Person> getPersonen();
-	
-	public void killPerson(int id);
+    public void createPerson(String name, String vorname, String adresse);
+
+    public ArrayList<Person> getPersonen();
+
+    public void killPerson(int id);
+
+    public void createApartment(int estateAgentId, String city, String postalCode, String street,
+            String streetNumber, double squareArea,
+            int floor, int rent, int rooms, boolean hasBalcony, boolean builtInKitchen);
+
+    public void createHouse(int estateAgentId, String city, String postalCode,
+            String street, String streetNumber,
+            double squareArea,
+            int floors, int price, boolean hasGarden);
+
+    public ArrayList<House> getHouses();
+
+    public ArrayList<Apartment> getApartments();
+
+    public void killHouse(int id);
+
+    public void killApartment(int id);
 }

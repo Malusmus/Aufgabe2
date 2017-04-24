@@ -105,7 +105,13 @@ public class EstateAgent extends ADatabaseElement {
         return "estateAgent";
     }
 
-	public String toString(){
-		return name + " (" + estateAgentId + ")";
-	}
+    public String toString() {
+        return name + " (" + estateAgentId + ")";
+    }
+
+    @Override
+    protected ADatabaseElement preUpdate() {
+        return null;
+    }
+
 }

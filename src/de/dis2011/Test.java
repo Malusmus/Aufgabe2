@@ -17,13 +17,16 @@ public class Test {
     
     public static void main(String[] args) {
         HandlerImpl impl = new HandlerImpl();
-        ArrayList<EstateAgent> agents = impl.getEstateAgents();
-        impl.checkPasswordForMakler("derChuck", "passwort123");
-        impl.createAccount("test", "Testmakler", "Teststraße", "passwort321");
-        impl.fireEstateAgent(3);
+//        ArrayList<EstateAgent> agents = impl.getEstateAgents();
+//        impl.checkPasswordForMakler("derChuck", "passwort123");
+//        impl.createAccount("test", "Testmakler", "Teststraße", "passwort321");
+//        impl.fireEstateAgent(3);
+//        
+//        ArrayList<Person> persons = impl.getPersonen();
+//        impl.createPerson("Test", "Testvorname", "Testadresse");
+//        impl.killPerson(1);
         
-        ArrayList<Person> persons = impl.getPersonen();
-        impl.createPerson("Test", "Testvorname", "Testadresse");
+        impl.createApartment(1, "Test", "12345", "Teststraße", "123", 100, 1, 1000, 1, true, true);
         
     }
 }

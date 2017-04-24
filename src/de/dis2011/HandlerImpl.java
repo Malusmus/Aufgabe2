@@ -44,7 +44,7 @@ public class HandlerImpl implements UseCaseHandler {
         EstateAgent newAccount = new EstateAgent();
         Map<String, Object> ids = newAccount.makeId();
 
-        newAccount.setEstateAgentId((int) ids.get("estateAgentId"));
+        newAccount.setEstateAgentId((Integer) ids.get("estateAgentId"));
         newAccount.setLogin(login);
         newAccount.setName(maklerName);
         newAccount.setAddress(address);
@@ -69,7 +69,7 @@ public class HandlerImpl implements UseCaseHandler {
         Person person = new Person();
         Map<String, Object> ids = person.makeId();
 
-        person.setId((int) ids.get("id"));
+        person.setId((Integer) ids.get("id"));
         person.setAddress(adresse);
         person.setFirstName(vorname);
         person.setName(name);
@@ -80,6 +80,62 @@ public class HandlerImpl implements UseCaseHandler {
     @Override
     public ArrayList<Person> getPersonen() {
         return (ArrayList) ADatabaseElement.loadAll(Person.class, null);
+    }
+
+    @Override
+    public void killPerson(int id) {
+        Person person = new Person();
+        person.setId(id);
+
+        person.delete();
+    }
+
+    @Override
+    public void createApartment(int estateAgentId, String city, String postalCode, String street,
+            String streetNumber, double squareArea, int floor, int rent, int rooms, boolean hasBalcony,
+            boolean builtInKitchen) {
+        Apartment newApartment = new Apartment();
+        Map<String, Object> ids = newApartment.makeId();
+
+        newApartment.setEstateId((Integer) ids.get("id"));
+        newApartment.setBuiltInKitchen(builtInKitchen);
+        newApartment.setCity(city);
+        newApartment.setEstateAgentId(estateAgentId);
+        newApartment.setFloor(floor);
+        newApartment.setHasBalcony(hasBalcony);
+        newApartment.setPostalCode(postalCode);
+        newApartment.setRent(rent);
+        newApartment.setRooms(rooms);
+        newApartment.setSquareArea(squareArea);
+        newApartment.setStreet(street);
+        newApartment.setStreetNumber(streetNumber);
+
+        newApartment.create();
+    }
+
+    @Override
+    public void createHouse(int estateAgentId, String city, String postalCode, String street, String streetNumber, double squareArea, int floors, int price, boolean hasGarden) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ArrayList<House> getHouses() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ArrayList<Apartment> getApartments() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void killHouse(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void killApartment(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

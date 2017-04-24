@@ -7,6 +7,7 @@ package de.dis2011.data;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -87,12 +88,13 @@ public class Apartment extends Estate {
 
     @Override
     protected Map<String, Object> getValues() {
-        Map<String, Object> values = super.getValues();
+        Map<String, Object> values = new HashMap<>();
         values.put("floor", floor);
         values.put("rent", rent);
         values.put("rooms", rooms);
-        values.put("hasBalcony", hasBalcony);
-        values.put("builtInKitchen", builtInKitchen);
+        values.put("hasBalcony", hasBalcony ? 1 : 0);
+        values.put("builtInKitchen", builtInKitchen ? 1 : 0);
+        values.put("estateId", getEstateId());
 
         return values;
     }
@@ -106,6 +108,20 @@ public class Apartment extends Estate {
         rooms = res.getInt("rooms");
         hasBalcony = res.getBoolean("hasBalcony");
         builtInKitchen = res.getBoolean("builtInKitchen");
+    }
+
+    @Override
+    protected ADatabaseElement preUpdate() {
+        Estate result = new Estate();
+        result.setCity(getCity());
+        result.setEstateAgentId(getEstateAgentId());
+        result.setEstateId(getEstateId());
+        result.setPostalCode(getPostalCode());
+        result.setSquareArea(getSquareArea());
+        result.setStreet(getStreet());
+        result.setStreetNumber(getStreetNumber());
+
+        return result;
     }
 
 }

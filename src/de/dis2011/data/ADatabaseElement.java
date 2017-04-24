@@ -93,32 +93,39 @@ public abstract class ADatabaseElement {
     }
 
     public Map<String, Object> makeId() {
-        Map<String, Object> result = new HashMap<String, Object>();
+        Map<String, Object> result = null;
         PreparedStatement pstmt = null;
         ResultSet res = null;
 
         try {
-            Connection con = DB2ConnectionManager.getInstance().getConnection();
-            Map<String, Object> ids = getIds();
+            ADatabaseElement pre = preUpdate();
 
-            String sql = "SELECT ";
-            String sqlCount = "";
+            if (pre != null) {
+                result = pre.makeId();
+            } else {
+                result = new HashMap<String, Object>();
+                Connection con = DB2ConnectionManager.getInstance().getConnection();
+                Map<String, Object> ids = getIds();
 
-            for (Entry<String, Object> value : ids.entrySet()) {
-                if (sqlCount.length() > 0) {
-                    sqlCount += ", ";
+                String sql = "SELECT ";
+                String sqlCount = "";
+
+                for (Entry<String, Object> value : ids.entrySet()) {
+                    if (sqlCount.length() > 0) {
+                        sqlCount += ", ";
+                    }
+
+                    sqlCount += "COALESCE(MAX(" + value.getKey() + "), 0) + 1 AS " + value.getKey();
                 }
 
-                sqlCount += "COALESCE(MAX(" + value.getKey() + "), 0) + 1 AS " + value.getKey();
-            }
+                pstmt = con.prepareStatement(sql + sqlCount + " FROM " + getTableNameRead());
 
-            pstmt = con.prepareStatement(sql + sqlCount + " FROM " + getTableNameRead());
+                res = pstmt.executeQuery();
 
-            res = pstmt.executeQuery();
-
-            while (res.next()) {
-                for (Entry<String, Object> value : ids.entrySet()) {
-                    result.put(value.getKey(), res.getObject(value.getKey()));
+                while (res.next()) {
+                    for (Entry<String, Object> value : ids.entrySet()) {
+                        result.put(value.getKey(), res.getObject(value.getKey()));
+                    }
                 }
             }
         } catch (SQLException e) {
@@ -148,6 +155,12 @@ public abstract class ADatabaseElement {
         PreparedStatement pstmt = null;
 
         try {
+            ADatabaseElement pre = preUpdate();
+
+            if (pre != null) {
+                pre.create();
+            }
+
             Connection con = DB2ConnectionManager.getInstance().getConnection();
             Map<String, Object> values = getIdsAndValues();
 
@@ -192,6 +205,12 @@ public abstract class ADatabaseElement {
         PreparedStatement pstmt = null;
 
         try {
+            ADatabaseElement pre = preUpdate();
+
+            if (pre != null) {
+                pre.update();
+            }
+
             Connection con = DB2ConnectionManager.getInstance().getConnection();
             Map<String, Object> ids = getIds();
             Map<String, Object> values = getValues();
@@ -244,6 +263,12 @@ public abstract class ADatabaseElement {
         PreparedStatement pstmt = null;
 
         try {
+            ADatabaseElement pre = preUpdate();
+
+            if (pre != null) {
+                pre.delete();
+            }
+
             Connection con = DB2ConnectionManager.getInstance().getConnection();
             Map<String, Object> ids = getIds();
 
@@ -295,6 +320,8 @@ public abstract class ADatabaseElement {
     protected abstract Map<String, Object> getIds();
 
     protected abstract Map<String, Object> getValues();
+
+    protected abstract ADatabaseElement preUpdate();
 
     public abstract String getTableNameUpdate();
 

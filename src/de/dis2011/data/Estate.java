@@ -19,7 +19,7 @@ import java.util.Map;
  */
 public class Estate extends ADatabaseElement {
 
-    private int estateId;
+    private int id;
     private int estateAgentId;
     private String city;
     private String postalCode;
@@ -31,7 +31,7 @@ public class Estate extends ADatabaseElement {
     }
 
     public Estate(int id, int estateAgentId, String city, String postalCode, String street, String streetNumber, double squareArea) {
-        this.estateId = id;
+        this.id = id;
         this.estateAgentId = estateAgentId;
         this.city = city;
         this.postalCode = postalCode;
@@ -41,7 +41,11 @@ public class Estate extends ADatabaseElement {
     }
 
     public int getEstateId() {
-        return estateId;
+        return id;
+    }
+
+    public void setEstateId(int estateId) {
+        this.id = estateId;
     }
 
     public int getEstateAgentId() {
@@ -100,7 +104,7 @@ public class Estate extends ADatabaseElement {
     @Override
     protected Map<String, Object> getIds() {
         Map<String, Object> result = new HashMap<String, Object>();
-        result.put("estateId", estateId);
+        result.put("id", id);
 
         return result;
     }
@@ -120,13 +124,18 @@ public class Estate extends ADatabaseElement {
 
     @Override
     protected void fill(ResultSet res) throws SQLException {
-        estateId = res.getInt("estateId");
+        id = res.getInt("id");
         estateAgentId = res.getInt("estateAgentId");
         city = res.getString("city");
         postalCode = res.getString("postalCode");
         street = res.getString("street");
         streetNumber = res.getString("streetNumber");
         squareArea = res.getDouble("squareArea");
+    }
+
+    @Override
+    protected ADatabaseElement preUpdate() {
+        return null;
     }
 
 }

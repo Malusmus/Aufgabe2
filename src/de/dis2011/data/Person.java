@@ -39,7 +39,6 @@ public class Person extends ADatabaseElement {
         this.id = id;
     }
 
-    
     public String getFirstName() {
         return firstName;
     }
@@ -98,4 +97,10 @@ public class Person extends ADatabaseElement {
         name = res.getString("name");
         address = res.getString("address");
     }
+
+    @Override
+    protected ADatabaseElement preUpdate() {
+        return null;
+    }
+
 }
