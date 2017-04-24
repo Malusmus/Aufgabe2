@@ -15,6 +15,10 @@ public class Main {
 	 * Startet die Anwendung
 	 */
 	public static void main(String[] args) {
+            
+            
+            
+            
 		gui = new Gui();
 	//	showMainMenu();
 	}
