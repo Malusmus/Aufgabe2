@@ -7,6 +7,8 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.UUID;
 
+import com.ibm.db2.jcc.b.id;
+
 /**
  *
  * @author aossa
@@ -103,4 +105,7 @@ public class EstateAgent extends ADatabaseElement {
         return "estateAgent";
     }
 
+	public String toString(){
+		return name + " (" + estateAgentId + ")";
+	}
 }

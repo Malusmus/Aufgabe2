@@ -13,7 +13,7 @@ import de.dis2011.data.Rents;
 import de.dis2011.data.Sells;
 import de.dis2011.data.TenancyContract;
 import java.util.HashMap;
-
+import java.util.List;
 import java.util.ArrayList;
 
 public interface UseCaseHandler {
@@ -22,7 +22,7 @@ public interface UseCaseHandler {
 
 	public void createAccount(String login, String maklerName, String address, String maklerPassword);
 
-	public HashMap<Integer, String> getEstateAgentNamesAndIDs();
+	public ArrayList<EstateAgent> getEstateAgents();
 
 	public void fireEstateAgent(int ID);
 }
