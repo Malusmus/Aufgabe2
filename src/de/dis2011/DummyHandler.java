@@ -41,18 +41,22 @@ public class DummyHandler implements UseCaseHandler {
 		_kunden.add(new Person(1, "Viktor", "Frankenstein", "unbekannt"));
 
 		_vertraege = new ArrayList<Contract>();
-		_vertraege.add(new TenancyContract(1, new Date(2017,2,7), "Hier", new Date(1999,10,10), new Date(2000,2,3), 1313));
-		_vertraege.add(new TenancyContract(2, new Date(2017,2,7), "Dort", new Date(1999,10,10), new Date(2000,2,3), 458));
-		_vertraege.add(new PurchaseContract(3, new Date(2010,1,2), "Habsburg", 7, 80.1));
-		_vertraege.add(new PurchaseContract(4, new Date(2010,1,2), "Blablub", 70, 458.1));
+		_vertraege.add(new TenancyContract(1, new Date(2017, 2, 7), "Hier", new Date(1999, 10, 10),
+				new Date(2000, 2, 3), 1313));
+		_vertraege.add(new TenancyContract(2, new Date(2017, 2, 7), "Dort", new Date(1999, 10, 10),
+				new Date(2000, 2, 3), 458));
+		_vertraege.add(new PurchaseContract(3, new Date(2010, 1, 2), "Habsburg", 7, 80.1));
+		_vertraege.add(new PurchaseContract(4, new Date(2010, 1, 2), "Blablub", 70, 458.1));
 
 		_verkaeufe = new ArrayList<Sells>();
-		_verkaeufe.add(new Sells((PurchaseContract) _vertraege.get(2),(House) _immobilien.get(0), _kunden.get(0)));
-		_verkaeufe.add(new Sells((PurchaseContract) _vertraege.get(3),(House) _immobilien.get(1), _kunden.get(1)));
+		_verkaeufe.add(new Sells((PurchaseContract) _vertraege.get(2), (House) _immobilien.get(0), _kunden.get(0)));
+		_verkaeufe.add(new Sells((PurchaseContract) _vertraege.get(3), (House) _immobilien.get(1), _kunden.get(1)));
 
 		_vermietungen = new ArrayList<Rents>();
-		_vermietungen.add(new Rents((TenancyContract) _vertraege.get(0),(Apartment) _immobilien.get(2), _kunden.get(2)));
-		_vermietungen.add(new Rents((TenancyContract) _vertraege.get(1),(Apartment) _immobilien.get(3), _kunden.get(1)));
+		_vermietungen
+				.add(new Rents((TenancyContract) _vertraege.get(0), (Apartment) _immobilien.get(2), _kunden.get(2)));
+		_vermietungen
+				.add(new Rents((TenancyContract) _vertraege.get(1), (Apartment) _immobilien.get(3), _kunden.get(1)));
 	}
 
 	@Override
@@ -69,9 +73,9 @@ public class DummyHandler implements UseCaseHandler {
 
 	@Override
 	public void createAccount(String login, String maklerName, String address, String maklerPassword) {
-//		_makler.add(new EstateAgent(maklerName, address, login, maklerPassword));
+		// _makler.add(new EstateAgent(maklerName, address, login,
+		// maklerPassword));
 	}
-
 
 	@Override
 	public void fireEstateAgent(int ID) {
@@ -79,8 +83,8 @@ public class DummyHandler implements UseCaseHandler {
 			if (m.getEstateAgentId() == ID) {
 				_makler.remove(m);
 				return;
-				}
 			}
+		}
 	}
 
 	@Override
@@ -88,7 +92,7 @@ public class DummyHandler implements UseCaseHandler {
 		return _makler;
 	}
 
-	public void createPerson(String name, String vorname, String adresse){
+	public void createPerson(String name, String vorname, String adresse) {
 		_kunden.add(new Person(13, vorname, name, adresse));
 	}
 
@@ -96,13 +100,15 @@ public class DummyHandler implements UseCaseHandler {
 	public ArrayList<Person> getPersonen() {
 		return _kunden;
 	}
-	
-	public void killPerson(int ID){
-	for (Person p : _kunden) {
-		if (p.getId() == ID) {
-			_kunden.remove(ID);
-			return;
+
+	public void killPerson(int ID) {
+		for (Person p : _kunden) {
+			if (p.getId() == ID) {
+				_kunden.remove(ID);
+				return;
 			}
 		}
+
+	}
 
 }

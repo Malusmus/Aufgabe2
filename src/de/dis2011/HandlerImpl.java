@@ -44,7 +44,7 @@ public class HandlerImpl implements UseCaseHandler {
         EstateAgent newAccount = new EstateAgent();
         Map<String, Object> ids = newAccount.makeId();
 
-        newAccount.setEstateAgentId((int) ids.get("estateAgentId"));
+        newAccount.setEstateAgentId((Integer) ids.get("estateAgentId"));
         newAccount.setLogin(login);
         newAccount.setName(maklerName);
         newAccount.setAddress(address);
@@ -69,7 +69,7 @@ public class HandlerImpl implements UseCaseHandler {
         Person person = new Person();
         Map<String, Object> ids = person.makeId();
 
-        person.setId((int) ids.get("id"));
+        person.setId((Integer) ids.get("id"));
         person.setAddress(adresse);
         person.setFirstName(vorname);
         person.setName(name);
@@ -81,5 +81,11 @@ public class HandlerImpl implements UseCaseHandler {
     public ArrayList<Person> getPersonen() {
         return (ArrayList) ADatabaseElement.loadAll(Person.class, null);
     }
+
+	@Override
+	public void killPerson(int id) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
