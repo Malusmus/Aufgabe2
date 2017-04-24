@@ -5,11 +5,18 @@
  */
 package de.dis2011.data;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  *
  * @author aossa
  */
-public abstract class Estate {
+public class Estate extends ADatabaseElement {
 
     private int estateId;
     private int estateAgentId;
@@ -19,17 +26,19 @@ public abstract class Estate {
     private String streetNumber;
     private double squareArea;
 
-    public Estate( int id, int estateAgentId, String city, String postalCode, String street, String streetNumber, double squareArea){
-     this.estateId = id;
-     this.estateAgentId = estateAgentId;
-     this.city = city;
-     this.postalCode = postalCode;
-     this.street = street;
-     this.streetNumber = streetNumber;
-     this.squareArea = squareArea;
-     }
-    
-    
+    public Estate() {
+    }
+
+    public Estate(int id, int estateAgentId, String city, String postalCode, String street, String streetNumber, double squareArea) {
+        this.estateId = id;
+        this.estateAgentId = estateAgentId;
+        this.city = city;
+        this.postalCode = postalCode;
+        this.street = street;
+        this.streetNumber = streetNumber;
+        this.squareArea = squareArea;
+    }
+
     public int getEstateId() {
         return estateId;
     }
@@ -80,6 +89,43 @@ public abstract class Estate {
 
     public void setSquareArea(double squareArea) {
         this.squareArea = squareArea;
+    }
+
+    @Override
+    public String getTableNameUpdate() {
+        return "estate";
+    }
+
+    @Override
+    protected Map<String, Object> getIds() {
+        Map<String, Object> result = new HashMap<String, Object>();
+        result.put("estateId", estateId);
+
+        return result;
+    }
+
+    @Override
+    protected Map<String, Object> getValues() {
+        Map<String, Object> result = new HashMap<String, Object>();
+        result.put("estateAgentId", estateAgentId);
+        result.put("city", city);
+        result.put("postalCode", postalCode);
+        result.put("street", street);
+        result.put("streetNumber", streetNumber);
+        result.put("squareArea", squareArea);
+
+        return result;
+    }
+
+    @Override
+    protected void fill(ResultSet res) throws SQLException {
+        estateId = res.getInt("estateId");
+        estateAgentId = res.getInt("estateAgentId");
+        city = res.getString("city");
+        postalCode = res.getString("postalCode");
+        street = res.getString("street");
+        streetNumber = res.getString("streetNumber");
+        squareArea = res.getDouble("squareArea");
     }
 
 }
