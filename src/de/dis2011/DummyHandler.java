@@ -27,7 +27,7 @@ public class DummyHandler implements UseCaseHandler {
 		_makler = new ArrayList<EstateAgent>();
 		_makler.add(new EstateAgent(1, "Gertrude Mueller", "Unterm Sofa 7", "Gertie", "passwort1"));
 		_makler.add(new EstateAgent(2, "Chuck Norris", "Universum", "Awesome", ""));
-		_makler.add(new EstateAgent(3, "Benjamin Blümchen", "Im Zoo", "Elefant", "123"));
+		_makler.add(new EstateAgent(3, "Benjamin Bluemchen", "Im Zoo", "Elefant", "123"));
 
 		_immobilien = new ArrayList<Estate>();
 		_immobilien.add(new House(1, 2, "Hamburg", "123", "Blauweg", "12", 123, 12, 17178, true));
@@ -37,14 +37,14 @@ public class DummyHandler implements UseCaseHandler {
 
 		_kunden = new ArrayList<Person>();
 		_kunden.add(new Person(1, "Anna", "Meier", "Aus dem Wald 23"));
-		_kunden.add(new Person(1, "Dörte", "Bauer", "Vom Acker 46"));
+		_kunden.add(new Person(1, "Doerte", "Bauer", "Vom Acker 46"));
 		_kunden.add(new Person(1, "Viktor", "Frankenstein", "unbekannt"));
 
 		_vertraege = new ArrayList<Contract>();
 		_vertraege.add(new TenancyContract(1, new Date(2017,2,7), "Hier", new Date(1999,10,10), new Date(2000,2,3), 1313));
 		_vertraege.add(new TenancyContract(2, new Date(2017,2,7), "Dort", new Date(1999,10,10), new Date(2000,2,3), 458));
 		_vertraege.add(new PurchaseContract(3, new Date(2010,1,2), "Habsburg", 7, 80.1));
-		_vertraege.add(new PurchaseContract(4, new Date(2010,1,2), "Drüben", 70, 458.1));
+		_vertraege.add(new PurchaseContract(4, new Date(2010,1,2), "Blablub", 70, 458.1));
 
 		_verkaeufe = new ArrayList<Sells>();
 		_verkaeufe.add(new Sells((PurchaseContract) _vertraege.get(2),(House) _immobilien.get(0), _kunden.get(0)));
@@ -69,7 +69,7 @@ public class DummyHandler implements UseCaseHandler {
 
 	@Override
 	public void createAccount(String login, String maklerName, String address, String maklerPassword) {
-		_makler.add(new EstateAgent(maklerName, address, login, maklerPassword));
+//		_makler.add(new EstateAgent(maklerName, address, login, maklerPassword));
 	}
 
 
