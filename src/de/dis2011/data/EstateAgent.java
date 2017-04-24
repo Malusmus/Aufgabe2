@@ -3,6 +3,8 @@ package de.dis2011.data;
 import java.util.Timer;
 import java.util.UUID;
 
+import com.ibm.db2.jcc.b.id;
+
 /**
  *
  * @author aossa
@@ -71,4 +73,7 @@ public class EstateAgent {
 		this.password = password;
 	}
 
+	public String toString(){
+		return name + " (" + estateAgentId + ")";
+	}
 }

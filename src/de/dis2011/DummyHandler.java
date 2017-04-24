@@ -72,164 +72,20 @@ public class DummyHandler implements UseCaseHandler {
 		_makler.add(new EstateAgent(maklerName, address, login, maklerPassword));
 	}
 
+
 	@Override
-	public void deleteEstate(int id) {
-		// TODO Auto-generated method stub
-		for (Estate e : _immobilien) {
-			if (e.getEstateId() == id) {
-				_immobilien.remove(e);
+	public void fireEstateAgent(int ID) {
+		for (EstateAgent m : _makler) {
+			if (m.getEstateAgentId() == ID) {
+				_makler.remove(m);
+				return;
+				}
 			}
-		}
 	}
 
 	@Override
-	public void updateEstate(int id, String city, String postalCode, String street, String streetNumber,
-			int squareArea) {
-		for (Estate e : _immobilien) {
-			if (e.getEstateId() == id) {
-				e.setCity(city);
-				e.setPostalCode(postalCode);
-				e.setStreet(street);
-				e.setStreetNumber(streetNumber);
-				e.setSquareArea(squareArea);
-			}
-		}
-	}
-
-	@Override
-	public void updateApartment(int id, int floor, int rent, int rooms, boolean balcony, boolean kitchen) {
-		for (Estate e : _immobilien) {
-			if (e.getEstateId() == id) {
-				((Apartment) e).setFloor(floor);
-				((Apartment) e).setRent(rent);
-				((Apartment) e).setRooms(rooms);
-				((Apartment) e).setHasBalcony(balcony);
-				((Apartment) e).setBuiltInKitchen(kitchen);
-			}
-		}
-	}
-
-	@Override
-	public void updateHouse(int id, int floors, int price, boolean garden) {
-		for (Estate e : _immobilien) {
-			if (e.getEstateId() == id) {
-				((House) e).setFloors(floors);
-				((House) e).setPrice(price);
-				((House) e).setHasGarden(garden);
-			}
-		}
-	}
-
-	@Override
-	public void createTenancyContractSpecifics(int number, Date d, String p, Date startDate, Date duration,
-			int additionalCosts) {
-		_vertraege.add(new TenancyContract(number, d, p, startDate, duration, additionalCosts));
-	}
-
-	@Override
-	public void createPurchaseContractSpecifics(int number, Date d, String p, int numberInstallments,
-			int interestRate) {
-		_vertraege.add(new PurchaseContract(number, d, p, numberInstallments, interestRate));
-	}
-
-	@Override
-	public void updateContractGeneral(int number, Date d, String p) {
-		for (Contract c : _vertraege) {
-			if (c.getContractNo() == number && c instanceof PurchaseContract) {
-				c.setContractNo(number);
-				c.setDate(d);
-				c.setPlace(p);
-			}
-		}
-	}
-
-	@Override
-	public void updateTenancyContractSpecifics(int number, Date startDate, Date duration, int additionalCosts) {
-		for (Contract c : _vertraege) {
-			if (c.getContractNo() == number && c instanceof TenancyContract) {
-				((TenancyContract) c).setDate(startDate);
-				((TenancyContract) c).setDuration(duration);
-				((TenancyContract) c).setAdditionalCosts(additionalCosts);
-			}
-		}
-	}
-
-	@Override
-	public void updatePurchaseContractSpecifics(int number, int numberInstallments, int interestRate) {
-		for (Contract c : _vertraege) {
-			if (c.getContractNo() == number) {
-				((PurchaseContract) c).setNoOfInstallments(numberInstallments);
-				((PurchaseContract) c).setInterestRate(interestRate);
-			}
-		}
-	}
-
-	@Override
-	public void insertPerson(Person person, int contractNo) {
-		for (Sells s : _verkaeufe) {
-			if (s.getPurchaseContract().getContractNo() == contractNo) {
-				s.setPerson(person);
-			}
-		}
-		for (Rents r : _vermietungen) {
-			if (r.getContract().getContractNo() == contractNo) {
-				r.setPerson(person);
-			}
-		}
-	}
-
-	@Override
-	public ArrayList<Contract> getAllContracts() {
-		return _vertraege;
-	}
-
-	@Override
-	public ArrayList<Estate> getAllEstates() {
-		return _immobilien;
-	}
-
-	@Override
-	public ArrayList<EstateAgent> getAllEstateAgents() {
+	public ArrayList<EstateAgent> getEstateAgents() {
 		return _makler;
-	}
-
-	@Override
-	public ArrayList<Person> getAllCustomers() {
-		return _kunden;
-	}
-
-	@Override
-	public ArrayList<Sells> getAllSales() {
-		return _verkaeufe;
-	}
-
-	@Override
-	public ArrayList<Rents> getAllRentings() {
-		return _vermietungen;
-	}
-
-	@Override
-	public void createSell(PurchaseContract pc, House h, Person p) {
-		_verkaeufe.add(new Sells(pc, h, p));
-	}
-
-	@Override
-	public void createVermietung(TenancyContract tc, Apartment a, Person p) {
-		_vermietungen.add(new Rents(tc, a, p));
-	}
-
-	@Override
-	public void createApartment(int id, int estateAgentId, String city, String postalCode, String street,
-			String streetNumber, int squareArea, int floor, int rent, int rooms, boolean balcony, boolean kitchen) {
-		_immobilien.add(new Apartment(id, estateAgentId, city, postalCode, street, streetNumber, squareArea, floor,
-				rent, rooms, balcony, kitchen));
-	}
-
-	@Override
-	public void createHouse(int id, int estateAgentId, String city, String postalCode, String street,
-			String streetNumber, int squareArea, int floors, int price, boolean garden) {
-		_immobilien.add(new House(id, estateAgentId, city, postalCode, street, streetNumber, squareArea, floors, price,
-				garden));
 	}
 
 }

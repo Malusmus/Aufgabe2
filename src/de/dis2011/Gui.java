@@ -10,9 +10,14 @@ import java.awt.GridLayout;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map.Entry;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -202,25 +207,36 @@ public class Gui {
 			}
 
 			private void deleteMakler() {
-				JDialog dialog = new JDialog(_main);
+				final JDialog dialog = new JDialog(_main);
 				JPanel pane = new JPanel();
 				dialog.add(pane);
 				
-				EstateAgent current;
-				JSpinner makler = new JSpinner(new SpinnerListModel(uch.getAllEstateAgents()));
+				int current;				
 				
+				final JComboBox<EstateAgent> makler = new JComboBox<EstateAgent>();
+				
+				makler.setSize(300, 100);
+				
+				pane.add(makler);
+				
+				ArrayList<EstateAgent> maklerListe = uch.getEstateAgents();
+				
+				for(EstateAgent e : maklerListe){
+					makler.addItem(e);
+				}
 				
 				_hammer.setText("Delete the chosen estate agent");
 				_hammer.addActionListener(new ActionListener() {
 					
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						uch.getAllEstateAgents().remove(current);
+					EstateAgent gefeuert = (EstateAgent) makler.getSelectedItem();
+					uch.fireEstateAgent(gefeuert.getEstateAgentId());
+					dialog.dispose();
 					}
 				});
 				
 				pane.add(_hammer);
-				
 				
 				dialog.setSize(500, 600);
 				dialog.setVisible(true);
