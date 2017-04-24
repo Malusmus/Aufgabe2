@@ -5,38 +5,49 @@
  */
 package de.dis2011.data;
 
+import java.awt.event.TextEvent;
+
 /**
  *
  * @author aossa
  */
 public class Rents {
 
-    private int apartmentId;
-    private int personId;
-    private int tenancyContractNo;
+	
+    //private int tenancyContractNo;
+    //private int apartmentId;
+    //private int personId;
+    private TenancyContract tenancy;
+    private Apartment flat;
+    private Person renter;
 
-    public int getApartmentId() {
-        return apartmentId;
-    }
+   public Rents(TenancyContract tenancy, Apartment flat, Person renter){
+	   this.tenancy = tenancy;
+	   this.flat = flat;
+	   this.renter = renter;
+   }
+   
+   public void setContract(TenancyContract c){
+	   tenancy = c;
+   }
 
-    public void setApartmentId(int apartmentId) {
-        this.apartmentId = apartmentId;
-    }
-
-    public int getPersonId() {
-        return personId;
-    }
-
-    public void setPersonId(int personId) {
-        this.personId = personId;
-    }
-
-    public int getTenancyContractNo() {
-        return tenancyContractNo;
-    }
-
-    public void setTenancyContractNo(int tenancyContractNo) {
-        this.tenancyContractNo = tenancyContractNo;
-    }
-
+   public TenancyContract getContract(){
+	   return tenancy;
+   }
+   
+   public void setApartment(Apartment a){
+	   flat = a;
+   }
+   
+   public Apartment getApartment(){
+	   return flat;
+   }
+   
+   public void setPerson(Person p){
+	   renter = p;
+   }
+ 
+   public Person getPerson(){
+	   return renter;
+   }
 }

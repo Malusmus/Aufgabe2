@@ -11,32 +11,38 @@ package de.dis2011.data;
  */
 public class Sells {
 
-    private int houseId;
-    private int personId;
-    private int purchaseContractNo;
+    private PurchaseContract purchaseContract;
+    private House house;
+    private Person person;
 
-    public int getHouseId() {
-        return houseId;
+    public Sells(PurchaseContract purchaseContract, House house, Person person){
+    	this.purchaseContract = purchaseContract;
+    	this.house = house;
+    	this.person = person;
+    }
+    
+    public House getHouse() {
+        return house;
     }
 
-    public void setHouseId(int houseId) {
-        this.houseId = houseId;
+    public void setHouse(House house) {
+        this.house = house;
     }
 
-    public int getPersonId() {
-        return personId;
+    public Person getPerson() {
+        return person;
     }
 
-    public void setPersonId(int personId) {
-        this.personId = personId;
+    public void setPerson(Person person) {
+        this.person = person;
     }
 
-    public int getPurchaseContractNo() {
-        return purchaseContractNo;
+    public PurchaseContract getPurchaseContract() {
+        return purchaseContract;
     }
 
-    public void setPurchaseContractNo(int purchaseContractNo) {
-        this.purchaseContractNo = purchaseContractNo;
+    public void setPurchaseContract(PurchaseContract purchaseContract) {
+        this.purchaseContract = purchaseContract;
     }
 
 }

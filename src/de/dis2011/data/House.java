@@ -9,22 +9,21 @@ package de.dis2011.data;
  *
  * @author aossa
  */
-public class House {
+public class House extends Estate{
 
-    private int estateId;
     private int floors;
     private int price;
     private boolean hasGarden;
 
-    public int getEstateId() {
-        return estateId;
-    }
+    public House(int estateId, int estateAgentId, String city, String postalCode, String street, String streetNumber, int squareArea, int floors, int price, boolean hasGarden){
+		super(estateId, estateAgentId, city, postalCode, street, streetNumber, squareArea);
+	    this.floors = floors;
+	    this.price = price;
+	    this.hasGarden = hasGarden;
+	}
 
-    public void setEstateId(int estateId) {
-        this.estateId = estateId;
-    }
 
-    public int getFloors() {
+	public int getFloors() {
         return floors;
     }
 

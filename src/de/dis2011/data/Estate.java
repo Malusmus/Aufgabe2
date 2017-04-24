@@ -9,9 +9,9 @@ package de.dis2011.data;
  *
  * @author aossa
  */
-public class Estate {
+public abstract class Estate {
 
-    private int id;
+    private int estateId;
     private int estateAgentId;
     private String city;
     private String postalCode;
@@ -19,12 +19,19 @@ public class Estate {
     private String streetNumber;
     private double squareArea;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public Estate( int id, int estateAgentId, String city, String postalCode, String street, String streetNumber, double squareArea){
+     this.estateId = id;
+     this.estateAgentId = estateAgentId;
+     this.city = city;
+     this.postalCode = postalCode;
+     this.street = street;
+     this.streetNumber = streetNumber;
+     this.squareArea = squareArea;
+     }
+    
+    
+    public int getEstateId() {
+        return estateId;
     }
 
     public int getEstateAgentId() {

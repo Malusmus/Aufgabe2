@@ -17,6 +17,8 @@ import javax.swing.WindowConstants;
 
 public class Gui {
 
+	UseCaseHandler uch = new DummyHandler();
+
 	JFrame _main;
 	JPanel _panel;
 
@@ -50,13 +52,22 @@ public class Gui {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				// TODO Bei Buttonklick die Anmeldung deichseln
-				_estateDialog = new JDialog();
+				String login = _eingabeName.getText();
+				String passwort = _passwortEingabe.getText();
+
+				if (uch.checkPasswordForMakler(login, passwort)) {
+					System.out.print("Passwort funzt.");
+					buildEstateMenu();
+				} else {
+					System.err.print("Passwort funzt nicht.");
+				}
+
 			}
 
 		});
 
 		buildEstateMenu();
+		
 
 		_main.add(_panel);
 		_panel.setVisible(true);
@@ -64,18 +75,16 @@ public class Gui {
 	}
 
 	private void buildEstateMenu() {
+		_estateDialog = new JDialog();
 		_estatePanel = new JPanel();
 		_estatePanel.setVisible(true);
+		_estateDialog.add(_estatePanel);
 		_estateType = new JSpinner(new SpinnerListModel(new String[] { "Apartment", "House" }));
 		_estatePanel.add(_estateType);
+		_estateDialog.setSize(800, 500);
+		_estateDialog.setVisible(true);
 	}
 
-	public String gibName() {
-		return _eingabeName.getText();
-	}
 
-	public String gibPasswort() {
-		return _passwortEingabe.getText();
-	}
 
 }

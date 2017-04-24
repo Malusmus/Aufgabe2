@@ -11,43 +11,42 @@ import java.util.Date;
  *
  * @author aossa
  */
-public class TenancyContract {
+public class TenancyContract extends Contract {
 
-    private int contractNo;
-    private Date startDate;
-    private Date duration;
-    private double additionalCosts;
+	private Date startDate;
+	private Date duration;
+	private double additionalCosts;
 
-    public int getContractNo() {
-        return contractNo;
-    }
+	public TenancyContract(int contractNo, Date date, String place, Date startDate, Date duration,
+			double additionalCosts) {
+		super(contractNo, date, place);
+		this.startDate = startDate;
+		this.duration = duration;
+		this.additionalCosts = additionalCosts;
+	}
 
-    public void setContractNo(int contractNo) {
-        this.contractNo = contractNo;
-    }
+	public Date getStartDate() {
+		return startDate;
+	}
 
-    public Date getStartDate() {
-        return startDate;
-    }
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
 
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
+	public Date getDuration() {
+		return duration;
+	}
 
-    public Date getDuration() {
-        return duration;
-    }
+	public void setDuration(Date duration) {
+		this.duration = duration;
+	}
 
-    public void setDuration(Date duration) {
-        this.duration = duration;
-    }
+	public double getAdditionalCosts() {
+		return additionalCosts;
+	}
 
-    public double getAdditionalCosts() {
-        return additionalCosts;
-    }
-
-    public void setAdditionalCosts(double additionalCosts) {
-        this.additionalCosts = additionalCosts;
-    }
+	public void setAdditionalCosts(double additionalCosts) {
+		this.additionalCosts = additionalCosts;
+	}
 
 }

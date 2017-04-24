@@ -11,11 +11,17 @@ import java.util.Date;
  *
  * @author aossa
  */
-public class Contract {
+public abstract class Contract {
 
     private int contractNo;
     private Date date;
     private String place;
+    
+    public Contract(int contractNo, Date date, String place){
+    	this.contractNo = contractNo;
+    	this.date = date;
+    	this.place = place;
+    }
 
     public int getContractNo() {
         return contractNo;

@@ -5,22 +5,22 @@
  */
 package de.dis2011.data;
 
+import java.util.Date;
+
 /**
  *
  * @author aossa
  */
-public class PurchaseContract {
+public class PurchaseContract extends Contract {
 
-    private int contractNo;
+	
     private int NoOfInstallments;
     private double InterestRate;
 
-    public int getContractNo() {
-        return contractNo;
-    }
-
-    public void setContractNo(int contractNo) {
-        this.contractNo = contractNo;
+    public PurchaseContract(int contractNo, Date date, String place, int NoOfInstallments, double InterestRate){
+    	super(contractNo, date, place);
+    	this.NoOfInstallments = NoOfInstallments;
+    	this.InterestRate = InterestRate;
     }
 
     public int getNoOfInstallments() {

@@ -1,55 +1,74 @@
 package de.dis2011.data;
 
+import java.util.Timer;
+import java.util.UUID;
+
 /**
  *
  * @author aossa
  */
 public class EstateAgent {
 
-    private int estateAgentId;
-    private String name;
-    private String address;
-    private String login;
-    private String password;
+	private int estateAgentId;
+	private String name;
+	private String address;
+	private String login;
+	private String password;
 
-    public int getEstateAgentId() {
-        return estateAgentId;
-    }
+	public EstateAgent(String name, String address, String login, String password) {
+		createId();
+		this.name = name;
+		this.address = address;
+		this.login = login;
+		this.password = password;
+	}
+	
+	public EstateAgent(int id, String name, String address, String login, String password) {
+		estateAgentId = id;
+		this.name = name;
+		this.address = address;
+		this.login = login;
+		this.password = password;
+	}
 
-    public void setEstateAgentId(int estateAgentId) {
-        this.estateAgentId = estateAgentId;
-    }
+	public void createId() {
+		estateAgentId = (int) Math.random() * 10000000;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public int getEstateAgentId() {
+		return estateAgentId;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public String getAddress() {
-        return address;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
+	public String getAddress() {
+		return address;
+	}
 
-    public String getLogin() {
-        return login;
-    }
+	public void setAddress(String address) {
+		this.address = address;
+	}
 
-    public void setLogin(String login) {
-        this.login = login;
-    }
+	public String getLogin() {
+		return login;
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	public void setLogin(String login) {
+		this.login = login;
+	}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
 }
