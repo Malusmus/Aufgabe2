@@ -51,4 +51,7 @@ public class Person {
 		this.address = address;
 	}
 
+	public String toString(){
+		return firstName + " " + name + " (" + id + ")";
+	}
 }

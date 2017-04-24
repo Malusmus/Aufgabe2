@@ -32,6 +32,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import de.dis2011.data.EstateAgent;
+import de.dis2011.data.Person;
 
 public class Gui {
 
@@ -167,7 +168,7 @@ public class Gui {
 			}
 
 			private void createMakler() {
-				JDialog dialog = new JDialog(_main);
+				final JDialog dialog = new JDialog(_main);
 				JPanel pane = new JPanel();
 				dialog.setSize(600, 500);
 				dialog.add(pane);
@@ -191,6 +192,8 @@ public class Gui {
 						uch.createAccount(login.getText(), name.getText(), adresse.getText(), passwort.getText());
 						JOptionPane.showMessageDialog(null, "Successfully created", "InfoBox: Create Makler",
 								JOptionPane.INFORMATION_MESSAGE);
+						dialog.dispose();
+
 					}
 				});
 				pane.add(_hammer);
@@ -210,39 +213,122 @@ public class Gui {
 				final JDialog dialog = new JDialog(_main);
 				JPanel pane = new JPanel();
 				dialog.add(pane);
-				
-				int current;				
-				
+
+				int current;
+
 				final JComboBox<EstateAgent> makler = new JComboBox<EstateAgent>();
-				
+
 				makler.setSize(300, 100);
-				
+
 				pane.add(makler);
-				
+
 				ArrayList<EstateAgent> maklerListe = uch.getEstateAgents();
-				
-				for(EstateAgent e : maklerListe){
+
+				for (EstateAgent e : maklerListe) {
 					makler.addItem(e);
 				}
-				
+
 				_hammer.setText("Delete the chosen estate agent");
 				_hammer.addActionListener(new ActionListener() {
-					
+
 					@Override
 					public void actionPerformed(ActionEvent e) {
-					EstateAgent gefeuert = (EstateAgent) makler.getSelectedItem();
-					uch.fireEstateAgent(gefeuert.getEstateAgentId());
-					dialog.dispose();
+						EstateAgent gefeuert = (EstateAgent) makler.getSelectedItem();
+						uch.fireEstateAgent(gefeuert.getEstateAgentId());
+						dialog.dispose();
 					}
 				});
-				
+
 				pane.add(_hammer);
-				
+
 				dialog.setSize(500, 600);
 				dialog.setVisible(true);
 			}
 		});
+	
+	createKunde.addActionListener(new ActionListener() {
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			final JDialog dialog = new JDialog(_main);
+			JPanel pane = new JPanel();
+			dialog.setSize(600, 500);
+			dialog.add(pane);
+			pane.add(new JLabel("Name"));
+			final JTextField name = new JTextField(20);
+			pane.add(name);
+			pane.add(new JLabel("Vorname"));
+			final JTextField vorname = new JTextField(20);
+			pane.add(vorname);
+			pane.add(new JLabel("Adresse"));
+			final JTextField adresse = new JTextField(20);
+			pane.add(adresse);
 
+			_hammer.setText("Create Person");
+			_hammer.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					uch.createPerson(name.getText(), vorname.getText(), adresse.getText());
+					JOptionPane.showMessageDialog(null, "Successfully created", "InfoBox: Create Makler",
+							JOptionPane.INFORMATION_MESSAGE);
+					dialog.dispose();
+
+				}
+			});
+			pane.add(_hammer);
+			dialog.setVisible(true);
+			pane.setVisible(true);
+		}
+	});
+	
+	deleteKunde.addActionListener(new ActionListener() {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			deleteKunde();
+		}
+
+		private void deleteKunde() {
+			final JDialog dialog = new JDialog(_main);
+			JPanel pane = new JPanel();
+			dialog.add(pane);
+
+			final JComboBox<Person> kunde = new JComboBox<Person>();
+
+			kunde.setSize(300, 100);
+
+			pane.add(kunde);
+
+			ArrayList<Person> kundenListe = uch.getPersonen();
+
+			for (Person p : kundenListe) {
+				kunde.addItem(p);
+			}
+
+			_hammer.setText("Delete the chosen person");
+			_hammer.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					Person gefeuert = (Person) kunde.getSelectedItem();
+					uch.getPersonen().remove(gefeuert.getId());
+					dialog.dispose();
+				}
+			});
+
+			pane.add(_hammer);
+
+			dialog.setSize(500, 600);
+			dialog.setVisible(true);
+		}
+	});
+	
 	}
 
+	
+	
+	
+	
 }
