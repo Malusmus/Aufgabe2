@@ -24,5 +24,5 @@ public interface UseCaseHandler {
 
 	public HashMap<Integer, String> getEstateAgentNamesAndIDs();
 
-	
+	public void fireEstateAgent(int ID);
 }
