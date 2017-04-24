@@ -1,5 +1,6 @@
 package de.dis2011;
 
+import java.awt.Checkbox;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -146,14 +147,21 @@ public class Gui {
 		choiceMenu.setVisible(true);
 		choicePanel.setVisible(true);
 
+		addCreateMaklerListener(createMakler);
+		addDeleteMarklerListenener(deleteMakler);
+		addPersonenCreateListener(createKunde);
+		addPersonenDeleteListener(deleteKunde);
+		addEstateCreateListener(createKunde);
+		addEstateDeleteListener(deleteKunde);
+
+	}
+
+	private void addCreateMaklerListener(JButton createMakler) {
 		createMakler.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				createMakler();
-			}
 
-			private void createMakler() {
 				final JDialog dialog = new JDialog(_main);
 				JPanel pane = new JPanel();
 				dialog.setSize(600, 500);
@@ -187,7 +195,9 @@ public class Gui {
 				pane.setVisible(true);
 			}
 		});
+	}
 
+	private void addDeleteMarklerListenener(JButton deleteMakler) {
 		deleteMakler.addActionListener(new ActionListener() {
 
 			@Override
@@ -231,16 +241,11 @@ public class Gui {
 				dialog.setVisible(true);
 			}
 		});
-	
-	addPersonenCreateListener(createKunde);
-	
-	addPersonenDeleteListener(deleteKunde);
-	
 	}
 
 	private void addPersonenCreateListener(JButton createKunde) {
 		createKunde.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
@@ -321,8 +326,113 @@ public class Gui {
 		});
 	}
 
-	
-	
-	
-	
+	private void addEstateCreateListener(JButton createEstate) {
+		createEstate.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				final JDialog dialog = new JDialog(_main);
+				JPanel pane = new JPanel();
+				dialog.setSize(600, 500);
+				dialog.add(pane);
+				//id agent city postalcode street streetnr squarearea
+				pane.add(new JLabel("EstateAgent"));
+				final JTextField makler = new JTextField(20);
+				pane.add(makler);
+				pane.add(new JLabel("City"));
+				final JTextField city = new JTextField(20);
+				pane.add(city);
+				pane.add(new JLabel("PostalCode"));
+				final JTextField PostalCode = new JTextField(20);
+				pane.add(PostalCode);
+				pane.add(new JLabel("Street"));
+				final JTextField street = new JTextField(20);
+				pane.add(street);
+				pane.add(new JLabel("StreetNr"));
+				final JTextField streetnr = new JTextField(20);
+				pane.add(streetnr);
+				pane.add(new JLabel("SquareArea"));
+				final JTextField area = new JTextField(20);
+				pane.add(area);
+				Checkbox isHouse = new Checkbox("check for a house, don't for an apartment", true);
+				pane.add(isHouse);
+				if (isHouse.getState()){
+					JPanel haus = new JPanel();
+					// floors price hasGarden
+					JLabel floors = new JLabel("Anzahl Geschosse.");
+					JTextField tfloors = new JTextField();
+					JLabel price = new JLabel("Preis");
+					JTextField tprice = new JTextField();
+					JLabel garden = new JLabel("garden");
+					Checkbox hasGarden = new Checkbox("Hat einen Garten", false);
+					haus.add(floors);
+					haus.add(tfloors);
+					haus.add(price);
+					haus.add(tprice);
+					haus.add(garden);
+					haus.add(hasGarden);
+					
+					_hammer.setText("Create Haus");
+					_hammer.addActionListener(new ActionListener() {
+					
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							uch.createHouse(makler.getText(), city.getText(), PostalCode.getText(), street.getText(), streetnr.getText(), Double.parseDouble(area.getText()), Integer.parseInt(tprice.getText()), Integer.parseInt(tfloors.getText()), hasGarden.getState());
+							JOptionPane.showMessageDialog(null, "Successfully created", "InfoBox: Create Haus",
+									JOptionPane.INFORMATION_MESSAGE);
+							dialog.dispose();
+
+						}
+					});
+					flat.add(_hammer);
+					pane.add(haus);				} else {
+JPanel flat = new JPanel();
+					JLabel floor = new JLabel("Geschoss.");
+					JTextField tfloor = new JTextField();
+					JLabel price = new JLabel("Miete");
+					JTextField tprice = new JTextField();
+					JLabel rooms = new JLabel("Räume");
+					JTextField trooms = new JTextField();
+					JLabel balcony = new JLabel("Balkon");
+					Checkbox hasBalcony = new Checkbox("Hat einen Balkon", false);
+					JLabel kitchen = new JLabel("Küche");
+					Checkbox hasKitchen = new Checkbox("Hat eine Einbauküche", false);
+					
+					flat.add(floor);
+					flat.add(tfloor);
+					flat.add(price);
+					flat.add(tprice);
+					flat.add(rooms);
+					flat.add(trooms);
+					flat.add(balcony);
+					flat.add(hasBalcony);
+					flat.add(kitchen);
+					flat.add(hasKitchen);
+					
+					_hammer.setText("Create Apartment");
+					flat.add(_hammer);
+					pane.add(flat);
+					_hammer.addActionListener(new ActionListener() {
+						// floorInt rentInt roomsInt hasBalcony builtInKitchen
+
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							uch.createApartment(EstateAgent.getText(), city.getText(), PostalCode.getText(), street.getText(), streetnr.getText(), Double.parseDouble(area.getText()), 
+									Integer.parseInt(tfloor.getText()), Integer.parseInt(tprice.getText()), Integer.parseInt(trooms.getText()), hasBalcony.getState(), hasKitchen.getState());
+							JOptionPane.showMessageDialog(null, "Successfully created", "InfoBox: Create Haus",
+									JOptionPane.INFORMATION_MESSAGE);
+							dialog.dispose();
+
+						}
+					});
+
+					
+				}
+
+	dialog.setVisible(true);pane.setVisible(true);
+
+	}});}
+
+	private void addEstateDeleteListener(JButton deleteKunde) {
 }
