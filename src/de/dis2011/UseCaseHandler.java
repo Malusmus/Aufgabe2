@@ -29,4 +29,6 @@ public interface UseCaseHandler {
 	public void createPerson(String name, String vorname, String adresse);
 
 	public ArrayList<Person> getPersonen();
+	
+	public void killPerson(int id);
 }

@@ -96,5 +96,13 @@ public class DummyHandler implements UseCaseHandler {
 	public ArrayList<Person> getPersonen() {
 		return _kunden;
 	}
+	
+	public void killPerson(int ID){
+	for (Person p : _kunden) {
+		if (p.getId() == ID) {
+			_kunden.remove(ID);
+			return;
+			}
+		}
 
 }

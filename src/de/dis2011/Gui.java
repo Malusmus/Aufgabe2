@@ -1,20 +1,9 @@
 package de.dis2011;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Container;
-import java.awt.Dialog;
-import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map.Entry;
-
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -26,10 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerListModel;
-import javax.swing.SpinnerModel;
 import javax.swing.WindowConstants;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
 import de.dis2011.data.EstateAgent;
 import de.dis2011.data.Person;
@@ -246,85 +232,93 @@ public class Gui {
 			}
 		});
 	
-	createKunde.addActionListener(new ActionListener() {
-		
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			final JDialog dialog = new JDialog(_main);
-			JPanel pane = new JPanel();
-			dialog.setSize(600, 500);
-			dialog.add(pane);
-			pane.add(new JLabel("Name"));
-			final JTextField name = new JTextField(20);
-			pane.add(name);
-			pane.add(new JLabel("Vorname"));
-			final JTextField vorname = new JTextField(20);
-			pane.add(vorname);
-			pane.add(new JLabel("Adresse"));
-			final JTextField adresse = new JTextField(20);
-			pane.add(adresse);
-
-			_hammer.setText("Create Person");
-			_hammer.addActionListener(new ActionListener() {
-
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					uch.createPerson(name.getText(), vorname.getText(), adresse.getText());
-					JOptionPane.showMessageDialog(null, "Successfully created", "InfoBox: Create Makler",
-							JOptionPane.INFORMATION_MESSAGE);
-					dialog.dispose();
-
-				}
-			});
-			pane.add(_hammer);
-			dialog.setVisible(true);
-			pane.setVisible(true);
-		}
-	});
+	addPersonenCreateListener(createKunde);
 	
-	deleteKunde.addActionListener(new ActionListener() {
+	addPersonenDeleteListener(deleteKunde);
+	
+	}
 
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			deleteKunde();
-		}
+	private void addPersonenCreateListener(JButton createKunde) {
+		createKunde.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				final JDialog dialog = new JDialog(_main);
+				JPanel pane = new JPanel();
+				dialog.setSize(600, 500);
+				dialog.add(pane);
+				pane.add(new JLabel("Name"));
+				final JTextField name = new JTextField(20);
+				pane.add(name);
+				pane.add(new JLabel("Vorname"));
+				final JTextField vorname = new JTextField(20);
+				pane.add(vorname);
+				pane.add(new JLabel("Adresse"));
+				final JTextField adresse = new JTextField(20);
+				pane.add(adresse);
 
-		private void deleteKunde() {
-			final JDialog dialog = new JDialog(_main);
-			JPanel pane = new JPanel();
-			dialog.add(pane);
+				_hammer.setText("Create Person");
+				_hammer.addActionListener(new ActionListener() {
 
-			final JComboBox<Person> kunde = new JComboBox<Person>();
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						uch.createPerson(name.getText(), vorname.getText(), adresse.getText());
+						JOptionPane.showMessageDialog(null, "Successfully created", "InfoBox: Create Makler",
+								JOptionPane.INFORMATION_MESSAGE);
+						dialog.dispose();
 
-			kunde.setSize(300, 100);
+					}
+				});
+				pane.add(_hammer);
+				dialog.setVisible(true);
+				pane.setVisible(true);
+			}
+		});
+	}
 
-			pane.add(kunde);
+	private void addPersonenDeleteListener(JButton deleteKunde) {
+		deleteKunde.addActionListener(new ActionListener() {
 
-			ArrayList<Person> kundenListe = uch.getPersonen();
-
-			for (Person p : kundenListe) {
-				kunde.addItem(p);
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				deleteKunde();
 			}
 
-			_hammer.setText("Delete the chosen person");
-			_hammer.addActionListener(new ActionListener() {
+			private void deleteKunde() {
+				final JDialog dialog = new JDialog(_main);
+				JPanel pane = new JPanel();
+				dialog.add(pane);
 
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					Person gefeuert = (Person) kunde.getSelectedItem();
-					uch.getPersonen().remove(gefeuert.getId());
-					dialog.dispose();
+				final JComboBox<Person> kunde = new JComboBox<Person>();
+
+				kunde.setSize(300, 100);
+
+				pane.add(kunde);
+
+				ArrayList<Person> kundenListe = uch.getPersonen();
+
+				for (Person p : kundenListe) {
+					kunde.addItem(p);
 				}
-			});
 
-			pane.add(_hammer);
+				_hammer.setText("Delete the chosen person");
+				_hammer.addActionListener(new ActionListener() {
 
-			dialog.setSize(500, 600);
-			dialog.setVisible(true);
-		}
-	});
-	
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						Person gefeuert = (Person) kunde.getSelectedItem();
+						uch.killPerson(gefeuert.getId());
+						dialog.dispose();
+					}
+				});
+
+				pane.add(_hammer);
+
+				dialog.setSize(500, 600);
+				dialog.setVisible(true);
+			}
+		});
 	}
 
 	
