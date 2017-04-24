@@ -53,15 +53,33 @@ public class HandlerImpl implements UseCaseHandler {
     }
 
     @Override
-    public HashMap<Integer, String> getEstateAgentNamesAndIDs() {
-        return null;
-    }
-
-    @Override
     public void fireEstateAgent(int ID) {
         EstateAgent account = new EstateAgent();
         account.setEstateAgentId(ID);
         account.delete();
+    }
+
+    @Override
+    public ArrayList<EstateAgent> getEstateAgents() {
+        return (ArrayList) ADatabaseElement.loadAll(EstateAgent.class, null);
+    }
+
+    @Override
+    public void createPerson(String name, String vorname, String adresse) {
+        Person person = new Person();
+        Map<String, Object> ids = person.makeId();
+
+        person.setId((int) ids.get("id"));
+        person.setAddress(adresse);
+        person.setFirstName(vorname);
+        person.setName(name);
+
+        person.create();
+    }
+
+    @Override
+    public ArrayList<Person> getPersonen() {
+        return (ArrayList) ADatabaseElement.loadAll(Person.class, null);
     }
 
 }

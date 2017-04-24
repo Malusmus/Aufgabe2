@@ -109,7 +109,7 @@ public abstract class ADatabaseElement {
                     sqlCount += ", ";
                 }
 
-                sqlCount += "COUNT(*) + 1 AS " + value.getKey();
+                sqlCount += "COALESCE(MAX(" + value.getKey() + "), 0) + 1 AS " + value.getKey();
             }
 
             pstmt = con.prepareStatement(sql + sqlCount + " FROM " + getTableNameRead());
