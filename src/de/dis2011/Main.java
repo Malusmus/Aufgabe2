@@ -15,7 +15,7 @@ public class Main {
 	 * Startet die Anwendung
 	 */
 	public static void main(String[] args) {  
-            Test.main(args);
+           // Test.main(args);
 		gui = new Gui();
 	//	showMainMenu();
 	}

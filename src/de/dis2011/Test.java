@@ -26,7 +26,7 @@ public class Test {
 //        impl.createPerson("Test", "Testvorname", "Testadresse");
 //        impl.killPerson(1);
         
-        impl.createApartment(1, "Test", "12345", "Teststraße", "123", 100, 1, 1000, 1, true, true);
+  //      impl.createApartment(1, "Test", "12345", "Teststraße", "123", 100, 1, 1000, 1, true, true);
         
     }
 }
