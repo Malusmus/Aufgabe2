@@ -9,12 +9,14 @@ import de.dis2011.data.EstateAgent;
  */
 public class Main {
 
+	static UseCaseHandler uch;
 	static Gui gui;
 	
 	/**
 	 * Startet die Anwendung
 	 */
 	public static void main(String[] args) {  
+		uch = new DummyHandler();
            // Test.main(args);
 		gui = new Gui();
 	//	showMainMenu();

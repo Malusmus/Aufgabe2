@@ -124,4 +124,9 @@ public class Apartment extends Estate {
 		return result;
 	}
 
+	public String toString(){
+	    return "Apartment " + street +" "+ streetNumber + ", " + city +  "(Id: " + id + ")";
+
+	}
+	
 }

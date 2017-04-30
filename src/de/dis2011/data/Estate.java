@@ -19,123 +19,124 @@ import java.util.Map;
  */
 public class Estate extends ADatabaseElement {
 
-    private int id;
-    private int estateAgentId;
-    private String city;
-    private String postalCode;
-    private String street;
-    private String streetNumber;
-    private double squareArea;
+	protected int id;
+	private int estateAgentId;
+	protected String city;
+	private String postalCode;
+	protected String street;
+	protected String streetNumber;
+	private double squareArea;
 
-    public Estate() {
-    }
+	public Estate() {
+	}
 
-    public Estate(int id, int estateAgentId, String city, String postalCode, String street, String streetNumber, double squareArea) {
-        this.id = id;
-        this.estateAgentId = estateAgentId;
-        this.city = city;
-        this.postalCode = postalCode;
-        this.street = street;
-        this.streetNumber = streetNumber;
-        this.squareArea = squareArea;
-    }
+	public Estate(int id, int estateAgentId, String city, String postalCode, String street, String streetNumber,
+			double squareArea) {
+		this.id = id;
+		this.estateAgentId = estateAgentId;
+		this.city = city;
+		this.postalCode = postalCode;
+		this.street = street;
+		this.streetNumber = streetNumber;
+		this.squareArea = squareArea;
+	}
 
-    public int getEstateId() {
-        return id;
-    }
+	public int getEstateId() {
+		return id;
+	}
 
-    public void setEstateId(int estateId) {
-        this.id = estateId;
-    }
+	public void setEstateId(int estateId) {
+		this.id = estateId;
+	}
 
-    public int getEstateAgentId() {
-        return estateAgentId;
-    }
+	public int getEstateAgentId() {
+		return estateAgentId;
+	}
 
-    public void setEstateAgentId(int estateAgentId) {
-        this.estateAgentId = estateAgentId;
-    }
+	public void setEstateAgentId(int estateAgentId) {
+		this.estateAgentId = estateAgentId;
+	}
 
-    public String getCity() {
-        return city;
-    }
+	public String getCity() {
+		return city;
+	}
 
-    public void setCity(String city) {
-        this.city = city;
-    }
+	public void setCity(String city) {
+		this.city = city;
+	}
 
-    public String getPostalCode() {
-        return postalCode;
-    }
+	public String getPostalCode() {
+		return postalCode;
+	}
 
-    public void setPostalCode(String postalCode) {
-        this.postalCode = postalCode;
-    }
+	public void setPostalCode(String postalCode) {
+		this.postalCode = postalCode;
+	}
 
-    public String getStreet() {
-        return street;
-    }
+	public String getStreet() {
+		return street;
+	}
 
-    public void setStreet(String street) {
-        this.street = street;
-    }
+	public void setStreet(String street) {
+		this.street = street;
+	}
 
-    public String getStreetNumber() {
-        return streetNumber;
-    }
+	public String getStreetNumber() {
+		return streetNumber;
+	}
 
-    public void setStreetNumber(String streetNumber) {
-        this.streetNumber = streetNumber;
-    }
+	public void setStreetNumber(String streetNumber) {
+		this.streetNumber = streetNumber;
+	}
 
-    public double getSquareArea() {
-        return squareArea;
-    }
+	public double getSquareArea() {
+		return squareArea;
+	}
 
-    public void setSquareArea(double squareArea) {
-        this.squareArea = squareArea;
-    }
+	public void setSquareArea(double squareArea) {
+		this.squareArea = squareArea;
+	}
 
-    @Override
-    public String getTableNameUpdate() {
-        return "estate";
-    }
+	@Override
+	public String getTableNameUpdate() {
+		return "estate";
+	}
 
-    @Override
-    protected Map<String, Object> getIds() {
-        Map<String, Object> result = new HashMap<String, Object>();
-        result.put("id", id);
+	@Override
+	protected Map<String, Object> getIds() {
+		Map<String, Object> result = new HashMap<String, Object>();
+		result.put("id", id);
 
-        return result;
-    }
+		return result;
+	}
 
-    @Override
-    protected Map<String, Object> getValues() {
-        Map<String, Object> result = new HashMap<String, Object>();
-        result.put("estateAgentId", estateAgentId);
-        result.put("city", city);
-        result.put("postalCode", postalCode);
-        result.put("street", street);
-        result.put("streetNumber", streetNumber);
-        result.put("squareArea", squareArea);
+	@Override
+	protected Map<String, Object> getValues() {
+		Map<String, Object> result = new HashMap<String, Object>();
+		result.put("estateAgentId", estateAgentId);
+		result.put("city", city);
+		result.put("postalCode", postalCode);
+		result.put("street", street);
+		result.put("streetNumber", streetNumber);
+		result.put("squareArea", squareArea);
 
-        return result;
-    }
+		return result;
+	}
 
-    @Override
-    protected void fill(ResultSet res) throws SQLException {
-        id = res.getInt("id");
-        estateAgentId = res.getInt("estateAgentId");
-        city = res.getString("city");
-        postalCode = res.getString("postalCode");
-        street = res.getString("street");
-        streetNumber = res.getString("streetNumber");
-        squareArea = res.getDouble("squareArea");
-    }
+	@Override
+	protected void fill(ResultSet res) throws SQLException {
+		id = res.getInt("id");
+		estateAgentId = res.getInt("estateAgentId");
+		city = res.getString("city");
+		postalCode = res.getString("postalCode");
+		street = res.getString("street");
+		streetNumber = res.getString("streetNumber");
+		squareArea = res.getDouble("squareArea");
+	}
 
-    @Override
-    protected ADatabaseElement preUpdate() {
-        return null;
-    }
+	@Override
+	protected ADatabaseElement preUpdate() {
+		return null;
+	}
 
 }

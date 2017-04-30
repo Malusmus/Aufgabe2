@@ -46,5 +46,10 @@ public class House extends Estate{
     public void setHasGarden(boolean hasGarden) {
         this.hasGarden = hasGarden;
     }
+    
+	public String toString(){
+	    return "Haus " + street +" "+ streetNumber + ", " + city +  "(Id: " + id + ")";
+
+	}
 
 }
