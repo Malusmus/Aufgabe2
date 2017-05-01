@@ -200,15 +200,37 @@ public class HandlerImpl implements UseCaseHandler {
 		// TODO Auto-generated method stub
 	}
 
-	@Override
 	public void createSale(Sells sale) {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
 	public void createRent(Rents rent) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public ArrayList<Sells> getSells() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<Rents> getRents() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void deleteSale(Sells sale) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteRent(Rents rent) {
+		// TODO Auto-generated method stub
+		
 	}
 }

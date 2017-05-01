@@ -19,7 +19,7 @@ import de.dis2011.Gui;
 import de.dis2011.data.EstateAgent;
 
 public class Overview {
-	
+
 	public static JFrame _main;
 
 	public Overview() {
@@ -96,16 +96,30 @@ public class Overview {
 		addCreateBasicContractListener(createContract);
 		addDeleteBasicContractListener(deleteContract);
 
+		addCreateSpecificContractListener(createFinalContract);
+		addDeleteSpecificContractListemer(deleteFinalContract);
+		addShowContractOvervierListener(showContractOverview);
+	}
+
+	private void addShowContractOvervierListener(JButton showContractOverview) {
+		showContractOverview.addActionListener(GuiSpecificContract.showUs());
+	}
+
+	private void addDeleteSpecificContractListemer(JButton deleteFinalContract) {
+		deleteFinalContract.addActionListener(GuiSpecificContract.deleteSpecificContract());
+	}
+
+	private void addCreateSpecificContractListener(JButton createFinalContract) {
+		createFinalContract.addActionListener(GuiSpecificContract.createSpecificContract());
 	}
 
 	private void addCreateBasicContractListener(JButton createContract) {
 		createContract.addActionListener(GuiBasicContract.createContractListener(true));
 	}
-	
-	private void addDeleteBasicContractListener(JButton deleteContract) {
-		 deleteContract.addActionListener(GuiBasicContract.createContractListener(false));
-	}
 
+	private void addDeleteBasicContractListener(JButton deleteContract) {
+		deleteContract.addActionListener(GuiBasicContract.createContractListener(false));
+	}
 
 	private void addCreateMaklerListener(JButton createMakler) {
 		createMakler.addActionListener(GuiMakler.createMakler());

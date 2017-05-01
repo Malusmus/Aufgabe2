@@ -238,4 +238,34 @@ public class DummyHandler implements UseCaseHandler {
 			}
 		}
 	}
+
+	@Override
+	public void createSale(Sells sale) {
+		_verkaeufe.add(sale);
+	}
+
+	@Override
+	public void createRent(Rents rent) {
+		_vermietungen.add(rent);
+	}
+
+	@Override
+	public ArrayList<Sells> getSells() {
+		return _verkaeufe;
+	}
+
+	@Override
+	public ArrayList<Rents> getRents() {
+		return _vermietungen;
+	}
+
+	@Override
+	public void deleteSale(Sells sale) {
+		_verkaeufe.remove(sale);
+	}
+
+	@Override
+	public void deleteRent(Rents rent) {
+		_vermietungen.remove(rent);
+	}
 }

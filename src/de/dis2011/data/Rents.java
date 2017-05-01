@@ -50,4 +50,8 @@ public class Rents {
    public Person getPerson(){
 	   return renter;
    }
+   
+   public String toString(){
+ 		return renter.getName() + " " + flat.toString() + " " + tenancy.getDate().toString();
+     }
 }

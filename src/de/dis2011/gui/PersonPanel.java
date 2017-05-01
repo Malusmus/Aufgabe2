@@ -9,12 +9,10 @@ import javax.swing.JTextField;
 
 import de.dis2011.data.Person;
 
-public class PersonPanel {
+public class PersonPanel extends JPanel{
 
 	Person p;
 	
-	JPanel person = new JPanel();
-
 	JLabel idLabel = new JLabel("id");
 	JTextField id;
 
@@ -35,21 +33,21 @@ public class PersonPanel {
 		name = new JTextField(p.getName());
 		adress = new JTextField(p.getAddress());
 
-		person.add(idLabel);
-		person.add(id);
-		person.add(firstNameLabel);
-		person.add(firstName);
-		person.add(nameLabel);
-		person.add(name);
-		person.add(adressLabel);
-		person.add(adress);
+		add(idLabel);
+		add(id);
+		add(firstNameLabel);
+		add(firstName);
+		add(nameLabel);
+		add(name);
+		add(adressLabel);
+		add(adress);
 
-		person.setLayout(new BoxLayout(person, BoxLayout.Y_AXIS));
-		person.setVisible(true);
+		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		setVisible(true);
 	}
 
 	public JPanel getPersonPanel() {
-		return person;
+		return this;
 	}
 	
 	public Person getPersonPanelPerson(){

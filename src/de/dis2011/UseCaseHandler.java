@@ -55,5 +55,15 @@ public interface UseCaseHandler {
     
     public void deleteContract(int contractID);
     
+    public void createSale(Sells sale);
     
+    public void createRent(Rents rent);
+    
+    public ArrayList<Sells> getSells();
+    
+    public ArrayList<Rents> getRents();
+    
+    public void deleteSale(Sells sale);
+    
+    public void deleteRent(Rents rent);
 }

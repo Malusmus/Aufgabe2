@@ -44,5 +44,9 @@ public class Sells {
     public void setPurchaseContract(PurchaseContract purchaseContract) {
         this.purchaseContract = purchaseContract;
     }
+    
+    public String toString(){
+		return person.getName() + " " + house.toString() + " " + purchaseContract.getDate().toString();
+    }
 
 }
