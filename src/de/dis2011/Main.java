@@ -9,7 +9,7 @@ import de.dis2011.data.EstateAgent;
  */
 public class Main {
 
-	static UseCaseHandler uch;
+	public static UseCaseHandler uch;
 	static Gui gui;
 	
 	/**

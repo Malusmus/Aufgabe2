@@ -48,4 +48,12 @@ public interface UseCaseHandler {
     public void killHouse(int id);
 
     public void killApartment(int id);
+    
+    public ArrayList<Contract> getContracts();
+    
+    public void createContract(Contract c);
+    
+    public void deleteContract(int contractID);
+    
+    
 }

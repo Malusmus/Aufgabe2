@@ -39,4 +39,8 @@ public class PurchaseContract extends Contract {
         this.InterestRate = InterestRate;
     }
 
+    public String toString() {
+		return "Verkauf " + getPlace() + ", den" + getDate();
+	}
+    
 }

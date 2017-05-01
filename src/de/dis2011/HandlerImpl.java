@@ -138,4 +138,21 @@ public class HandlerImpl implements UseCaseHandler {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+	@Override
+	public ArrayList<Contract> getContracts() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void createContract(Contract c) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteContract(int contractID) {
+		// TODO Auto-generated method stub		
+	}
+
 }

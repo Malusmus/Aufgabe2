@@ -53,13 +53,13 @@ public class Login{
 			public void actionPerformed(ActionEvent arg0) {
 				String login = _eingabeName.getText();
 				String passwort = _passwortEingabe.getText();
-
-				if (uch.checkPasswordForMakler(login, passwort)) {
-					System.out.print("Passwort funzt.");
+				//FIXME Keine Passwortabfrage!!!
+				//if (uch.checkPasswordForMakler(login, passwort)) {
+				//System.out.print("Passwort funzt.");
 					new Overview();
-				} else {
-					System.err.print("Passwort funzt nicht.");
-				}
+			//	} else {
+			//	System.err.print("Passwort funzt nicht.");
+			//	}
 
 			}
 

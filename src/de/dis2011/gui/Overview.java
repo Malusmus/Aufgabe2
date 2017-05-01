@@ -9,6 +9,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -17,7 +18,9 @@ import javax.swing.JTextField;
 import de.dis2011.Gui;
 import de.dis2011.data.EstateAgent;
 
-public class Overview extends Gui {
+public class Overview {
+	
+	public static JFrame _main;
 
 	public Overview() {
 		JDialog choiceMenu = new JDialog(_main);
@@ -85,7 +88,24 @@ public class Overview extends Gui {
 		addCreateMaklerListener(createMakler);
 		addChangeMaklerListener(changeMakler);
 		addDeleteMaklerListener(deleteMakler);
+
+		addCreateEstateListener(createEstate);
+		addChangeEstateListener(changeEstate);
+		addDeleteEstateListener(deleteEstate);
+
+		addCreateBasicContractListener(createContract);
+		addDeleteBasicContractListener(deleteContract);
+
 	}
+
+	private void addCreateBasicContractListener(JButton createContract) {
+		createContract.addActionListener(GuiBasicContract.createContractListener(true));
+	}
+	
+	private void addDeleteBasicContractListener(JButton deleteContract) {
+		 deleteContract.addActionListener(GuiBasicContract.createContractListener(false));
+	}
+
 
 	private void addCreateMaklerListener(JButton createMakler) {
 		createMakler.addActionListener(GuiMakler.createMakler());
@@ -97,6 +117,18 @@ public class Overview extends Gui {
 
 	private void addDeleteMaklerListener(JButton deleteMakler) {
 		deleteMakler.addActionListener(GuiMakler.deleteMakler());
+	}
+
+	private void addCreateEstateListener(JButton createEstate) {
+		createEstate.addActionListener(GuiEstate.createEstate());
+	}
+
+	private void addChangeEstateListener(JButton changeEstate) {
+		changeEstate.addActionListener(GuiEstate.changeEstate());
+	}
+
+	private void addDeleteEstateListener(JButton deleteEstate) {
+		deleteEstate.addActionListener(GuiEstate.deleteEstate());
 	}
 
 }

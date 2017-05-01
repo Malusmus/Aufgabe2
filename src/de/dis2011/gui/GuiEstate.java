@@ -12,30 +12,38 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import de.dis2011.Gui;
+import de.dis2011.Main;
+import de.dis2011.UseCaseHandler;
 import de.dis2011.data.Apartment;
 import de.dis2011.data.Estate;
-import de.dis2011.data.EstateAgent;
 import de.dis2011.data.House;
 
-public class GuiEstate extends Gui {
+public class GuiEstate  {
 
-	final static JDialog dialog = new JDialog(_main);
+	static JDialog dialogCreate;
+	static JDialog dialogChange;
+	static JDialog dialogDelete;
+	
+	public final static UseCaseHandler uch = Main.uch;
+	public static JFrame _main;
 
-	public ActionListener createEstate() {
+	public static ActionListener createEstate() {
 		return new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
+				dialogCreate = new JDialog(_main);
 				final JPanel pane = new JPanel();
-				dialog.setSize(600, 500);
-				dialog.add(pane);
+				dialogCreate.setSize(600, 500);
+				dialogCreate.add(pane);
 
 				// Fixme sollte Auswahl sein
 				// Agent
@@ -66,10 +74,14 @@ public class GuiEstate extends Gui {
 				final Checkbox isHouse = new Checkbox("check for a house, don't for an apartment", true);
 				pane.add(isHouse);
 
-				final JPanel extraPane = new JPanel();
-				pane.add(extraPane);
 				final JPanel haus = new JPanel();
 				final JPanel flat = new JPanel();
+				
+				createHouse(haus, makler, city, PostalCode, street, streetnr, area);
+				createApartment(flat, makler, city, PostalCode, street, streetnr, area);
+				
+				haus.setVisible(true);
+				flat.setVisible(false);
 
 				/*
 				 * if (isHouse.getState()) { createHouse(dialog, extraPane,
@@ -82,11 +94,9 @@ public class GuiEstate extends Gui {
 					@Override
 					public void itemStateChanged(ItemEvent arg0) {
 						if (isHouse.getState()) {
-							createHouse(dialog, extraPane, haus, flat, makler, city, PostalCode, street, streetnr,
-									area);
+							haus.setVisible(true); flat.setVisible(false);
 						} else {
-							createApartment(dialog, extraPane, haus, flat, makler, city, PostalCode, street, streetnr,
-									area);
+							haus.setVisible(false); flat.setVisible(true);
 						}
 					}
 				};
@@ -94,52 +104,45 @@ public class GuiEstate extends Gui {
 				isHouse.addItemListener(boxi);
 
 				pane.setVisible(true);
-				extraPane.setVisible(true);
-				dialog.setVisible(true);
+				
+				pane.add(haus);
+				pane.add(flat);
+
+				
+				dialogCreate.setVisible(true);
 
 			}
 		};
 	}
 
-	private void createHouse(final JDialog dialog, JPanel pane, JPanel haus, JPanel flat, final JTextField makler,
-			final JTextField city, final JTextField PostalCode, final JTextField street, final JTextField streetnr,
-			final JTextField area) {
+	private static void createHouse(JPanel haus, final JTextField makler, final JTextField city,
+			final JTextField PostalCode, final JTextField street, final JTextField streetnr, final JTextField area) {
 		{
-			try {
-				pane.removeAll();
-			} catch (Exception e1) {
-			} finally {
-				haus.setLayout(new BoxLayout(haus, BoxLayout.Y_AXIS));
+			// Log
+			System.out.println("Haus!!");
+			haus.setLayout(new BoxLayout(haus, BoxLayout.Y_AXIS));
 
-				final JTextField floors = new JTextField(20);
-				haus.add(new JLabel("Anzahl Geschosse."));
-				haus.add(floors);
+			final JTextField floors = new JTextField(20);
+			haus.add(new JLabel("Anzahl Geschosse."));
+			haus.add(floors);
 
-				final JTextField price = new JTextField(20);
-				haus.add(new JLabel("Preis"));
-				haus.add(price);
+			final JTextField price = new JTextField(20);
+			haus.add(new JLabel("Preis"));
+			haus.add(price);
 
-				final Checkbox hasGarden = new Checkbox("Hat einen Garten", false);
-				haus.add(new JLabel("Has Garden"));
-				haus.add(hasGarden);
+			final Checkbox hasGarden = new Checkbox("Hat einen Garten", false);
+			haus.add(new JLabel("Has Garden"));
+			haus.add(hasGarden);
 
-				JButton createHouse = new JButton();
-				createHouse.setText("Create Haus");
-				createHouse.addActionListener(
-						createHouseButton(makler, city, PostalCode, street, streetnr, area, floors, price, hasGarden));
-				haus.add(createHouse);
-				try {
-					pane.remove(flat);
-				} catch (Exception e) {
-					e.printStackTrace();
-				} finally {
-					pane.add(haus);
-				}
-			}
+			JButton createHouse = new JButton();
+			createHouse.setText("Create Haus");
+			createHouse.addActionListener(
+					createHouseButton(makler, city, PostalCode, street, streetnr, area, floors, price, hasGarden));
+			haus.add(createHouse);
 		}
 	}
 
-	private ActionListener createHouseButton(final JTextField makler, final JTextField city,
+	private static ActionListener createHouseButton(final JTextField makler, final JTextField city,
 			final JTextField PostalCode, final JTextField street, final JTextField streetnr, final JTextField area,
 			final JTextField floors, final JTextField price, final Checkbox hasGarden) {
 		return new ActionListener() {
@@ -151,14 +154,13 @@ public class GuiEstate extends Gui {
 						Integer.parseInt(price.getText()), Integer.parseInt(floors.getText()), hasGarden.getState());
 				JOptionPane.showMessageDialog(null, "Successfully created", "InfoBox: Create Haus",
 						JOptionPane.INFORMATION_MESSAGE);
-				dialog.dispose();
+				dialogCreate.dispose();
 			}
 		};
 	}
 
-	private void createApartment(final JDialog dialog, JPanel pane, JPanel haus, JPanel flat, final JTextField makler,
-			final JTextField city, final JTextField PostalCode, final JTextField street, final JTextField streetnr,
-			final JTextField area) {
+	private static void createApartment(JPanel flat, final JTextField makler, final JTextField city,
+			final JTextField PostalCode, final JTextField street, final JTextField streetnr, final JTextField area) {
 
 		flat.setLayout(new BoxLayout(flat, BoxLayout.Y_AXIS));
 		// Stockwerk
@@ -187,20 +189,9 @@ public class GuiEstate extends Gui {
 		createApartment.addActionListener(createApartmentButton(makler, city, PostalCode, street, streetnr, area, floor,
 				rent, rooms, hasBalcony, hasKitchen));
 		flat.add(createApartment);
-
-		try {
-			pane.remove(haus);
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			pane.add(flat);
-		}
-
-		dialog.setVisible(true);
-		pane.setVisible(true);
 	}
 
-	private ActionListener createApartmentButton(final JTextField makler, final JTextField city,
+	private static ActionListener createApartmentButton(final JTextField makler, final JTextField city,
 			final JTextField PostalCode, final JTextField street, final JTextField streetnr, final JTextField area,
 			final JTextField floor, final JTextField rent, final JTextField rooms, final JCheckBox hasBalcony,
 			final JCheckBox hasKitchen) {
@@ -216,17 +207,18 @@ public class GuiEstate extends Gui {
 
 				JOptionPane.showMessageDialog(null, "Successfully created", "InfoBox: Create Apartment",
 						JOptionPane.INFORMATION_MESSAGE);
-				dialog.dispose();
+				dialogCreate.dispose();
 			}
 		};
 	}
 
-	public ActionListener changeEstate() {
+	public static ActionListener changeEstate() {
 		return new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				dialogChange = new JDialog(_main);
 				JPanel pane = new JPanel();
-				dialog.add(pane);
+				dialogChange.add(pane);
 
 				final JComboBox<Estate> estates = new JComboBox<Estate>();
 				estates.setSize(300, 100);
@@ -247,12 +239,12 @@ public class GuiEstate extends Gui {
 				}
 
 				JButton changeButton = new JButton();
-				changeButton.setText("Delete the chosen estate");
+				changeButton.setText("Change the chosen estate");
 				changeButton.addActionListener(changeButtonListener(estates));
 				pane.add(changeButton);
 
-				dialog.setSize(500, 600);
-				dialog.setVisible(true);
+				dialogChange.setSize(500, 600);
+				dialogChange.setVisible(true);
 			}
 		};
 	}
@@ -262,10 +254,11 @@ public class GuiEstate extends Gui {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
+				dialogChange.dispose();
+				dialogChange = new JDialog(_main);
 				JPanel pane = new JPanel();
-				dialog.setSize(600, 500);
-				dialog.add(pane);
+				dialogChange.setSize(600, 500);
+				dialogChange.add(pane);
 
 				// Aktuelles Estate
 				final Estate current = (Estate) estates.getSelectedItem();
@@ -300,75 +293,59 @@ public class GuiEstate extends Gui {
 				final JTextField area = new JTextField(estateSquareArea, 20);
 				pane.add(area);
 				// Typabfrage
-				final Checkbox isHouse = new Checkbox("check for a house, don't for an apartment",
-						current instanceof House);
-				pane.add(isHouse);
+				boolean check;
+				if (current instanceof House) {
+					check = true;
+				} else {
+					check = false;
+				}
 
 				final JPanel extraPane = new JPanel();
 				pane.add(extraPane);
 				final JPanel haus = new JPanel();
 				final JPanel flat = new JPanel();
 
-				ItemListener boxi = new ItemListener() {
-					@Override
-					public void itemStateChanged(ItemEvent arg0) {
-						if (isHouse.getState()) {
-							changeHouse((House) current, dialog, extraPane, haus, flat, makler, city, PostalCode,
-									street, streetnr, area);
-						} else {
-							changeApartment((Apartment) current, dialog, extraPane, haus, flat, makler, city,
-									PostalCode, street, streetnr, area);
-						}
-					}
-				};
-
-				isHouse.addItemListener(boxi);
+				if (check) {
+					changeHouse((House) current, extraPane, haus, makler, city, PostalCode, street, streetnr, area);
+				} else {
+					changeApartment((Apartment) current, extraPane, flat, makler, city, PostalCode, street, streetnr,
+							area);
+				}
 
 				pane.setVisible(true);
 				extraPane.setVisible(true);
-				dialog.setVisible(true);
+				pane.add(extraPane);
+				dialogChange.setVisible(true);
 			}
 		};
 	}
 
-	private static void changeHouse(House h, final JDialog dialog, JPanel pane, JPanel haus, JPanel flat,
-			final JTextField makler, final JTextField city, final JTextField PostalCode, final JTextField street,
-			final JTextField streetnr, final JTextField area) {
-		{
-			try {
-				pane.removeAll();
-			} catch (Exception e1) {
-			} finally {
-				haus.setLayout(new BoxLayout(haus, BoxLayout.Y_AXIS));
+	private static void changeHouse(House h, JPanel extraPane, JPanel haus, final JTextField makler, final JTextField city,
+			final JTextField PostalCode, final JTextField street, final JTextField streetnr, final JTextField area) {
 
-				haus.add(new JLabel("Anzahl Geschosse."));
-				String houseFloors = h.getFloors() + "";
-				final JTextField floors = new JTextField(houseFloors, 20);
-				haus.add(floors);
+		haus.setLayout(new BoxLayout(haus, BoxLayout.Y_AXIS));
+		// Stockwerke
+		haus.add(new JLabel("Anzahl Geschosse."));
+		String houseFloors = h.getFloors() + "";
+		final JTextField floors = new JTextField(houseFloors, 20);
+		haus.add(floors);
+		// Preis
+		haus.add(new JLabel("Preis"));
+		String housePrice = h.getPrice() + "";
+		final JTextField price = new JTextField(housePrice, 20);
+		haus.add(price);
+		// Garten?
+		haus.add(new JLabel("Has Garden"));
+		final Checkbox hasGarden = new Checkbox("Hat einen Garten", h.isHasGarden());
+		haus.add(hasGarden);
+		// Button
+		JButton createHouse = new JButton();
+		createHouse.setText("Change Haus");
+		createHouse.addActionListener(changeHouseButton(h.getEstateId(), makler, city, PostalCode, street, streetnr,
+				area, floors, price, hasGarden));
+		haus.add(createHouse);
 
-				haus.add(new JLabel("Preis"));
-				String housePrice = h.getPrice() + "";
-				final JTextField price = new JTextField(20);
-				haus.add(price);
-
-				haus.add(new JLabel("Has Garden"));
-				final Checkbox hasGarden = new Checkbox("Hat einen Garten", h.isHasGarden());
-				haus.add(hasGarden);
-
-				JButton createHouse = new JButton();
-				createHouse.setText("Create Haus");
-				createHouse.addActionListener(changeHouseButton(h.getEstateId(), makler, city, PostalCode, street,
-						streetnr, area, floors, price, hasGarden));
-				haus.add(createHouse);
-				try {
-					pane.remove(flat);
-				} catch (Exception e) {
-					e.printStackTrace();
-				} finally {
-					pane.add(haus);
-				}
-			}
-		}
+		extraPane.add(haus);
 	}
 
 	private static ActionListener changeHouseButton(final int estateID, final JTextField makler, final JTextField city,
@@ -382,16 +359,16 @@ public class GuiEstate extends Gui {
 				uch.createHouse(Integer.parseInt(makler.getText()), city.getText(), PostalCode.getText(),
 						street.getText(), streetnr.getText(), Double.parseDouble(area.getText()),
 						Integer.parseInt(price.getText()), Integer.parseInt(floors.getText()), hasGarden.getState());
-				JOptionPane.showMessageDialog(null, "Successfully changed", "InfoBox: Change Haus",
+				JOptionPane.showMessageDialog(null, "House successfully changed", "InfoBox: Change Haus",
 						JOptionPane.INFORMATION_MESSAGE);
-				dialog.dispose();
+				dialogChange.dispose();
 			}
 		};
 	}
 
-	private static void changeApartment(Apartment a, final JDialog dialog, JPanel pane, JPanel haus, JPanel flat,
-			final JTextField makler, final JTextField city, final JTextField PostalCode, final JTextField street,
-			final JTextField streetnr, final JTextField area) {
+	private static void changeApartment(Apartment a, JPanel extraPane, JPanel flat, final JTextField makler,
+			final JTextField city, final JTextField PostalCode, final JTextField street, final JTextField streetnr,
+			final JTextField area) {
 
 		flat.setLayout(new BoxLayout(flat, BoxLayout.Y_AXIS));
 		// Stockwerk
@@ -424,16 +401,7 @@ public class GuiEstate extends Gui {
 				streetnr, area, floor, rent, rooms, hasBalcony, hasKitchen));
 		flat.add(changeApartment);
 
-		try {
-			pane.remove(haus);
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			pane.add(flat);
-		}
-
-		dialog.setVisible(true);
-		pane.setVisible(true);
+		extraPane.add(flat);
 	}
 
 	private static ActionListener changeApartmentButton(final int estateID, final JTextField makler,
@@ -451,19 +419,20 @@ public class GuiEstate extends Gui {
 						Integer.parseInt(floor.getText()), Integer.parseInt(rent.getText()),
 						Integer.parseInt(rooms.getText()), hasBalcony.isSelected(), hasKitchen.isSelected());
 
-				JOptionPane.showMessageDialog(null, "Successfully created", "InfoBox: Change Apartment",
+				JOptionPane.showMessageDialog(null, "Apartment successfully changed", "InfoBox: Change Apartment",
 						JOptionPane.INFORMATION_MESSAGE);
-				dialog.dispose();
+				dialogChange.dispose();
 			}
 		};
 	}
 
-	public ActionListener deleteEstate() {
+	public static ActionListener deleteEstate() {
 		return new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				dialogDelete = new JDialog(_main);
 				JPanel pane = new JPanel();
-				dialog.add(pane);
+				dialogDelete.add(pane);
 
 				final JComboBox<Estate> estates = new JComboBox<Estate>();
 				estates.setSize(300, 100);
@@ -488,8 +457,8 @@ public class GuiEstate extends Gui {
 				deleteButton.addActionListener(deleteButtonListener(estates));
 				pane.add(deleteButton);
 
-				dialog.setSize(500, 600);
-				dialog.setVisible(true);
+				dialogDelete.setSize(500, 600);
+				dialogDelete.setVisible(true);
 			}
 		};
 	}
@@ -510,7 +479,7 @@ public class GuiEstate extends Gui {
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
-				dialog.dispose();
+				dialogDelete.dispose();
 			}
 		};
 	}

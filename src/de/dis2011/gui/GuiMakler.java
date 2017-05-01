@@ -7,26 +7,36 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import de.dis2011.Gui;
+import de.dis2011.Main;
+import de.dis2011.UseCaseHandler;
 import de.dis2011.data.EstateAgent;
 
-public class GuiMakler extends Gui {
+public class GuiMakler  {
 
-	final static JDialog dialog = new JDialog(_main);
+	 static JDialog dialogCreate;
+	 static JDialog dialogChange;
+	 static JDialog dialogDelete;
+	 
+		public final static UseCaseHandler uch = Main.uch;
+		public static JFrame _main;
+
 
 	static ActionListener createMakler() {
 		return new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				dialogCreate = new JDialog(_main);
 				JPanel paneCreate = new JPanel();
-				dialog.setSize(600, 500);
-				dialog.add(paneCreate);
+				dialogCreate.setSize(600, 500);
+				dialogCreate.add(paneCreate);
 				paneCreate.add(new JLabel("Name"));
 				final JTextField name = new JTextField(20);
 				paneCreate.add(name);
@@ -43,7 +53,7 @@ public class GuiMakler extends Gui {
 				createButton.setText("Create Makler");
 				createButton.addActionListener(createButtonListener(login, name, adresse, passwort));
 				paneCreate.add(createButton);
-				dialog.setVisible(true);
+				dialogCreate.setVisible(true);
 				paneCreate.setVisible(true);
 			}
 		};
@@ -57,8 +67,7 @@ public class GuiMakler extends Gui {
 				uch.createAccount(login.getText(), name.getText(), adresse.getText(), passwort.getText());
 				JOptionPane.showMessageDialog(null, "Successfully created", "InfoBox: Create Makler",
 						JOptionPane.INFORMATION_MESSAGE);
-				dialog.removeAll();
-				dialog.dispose();
+				dialogCreate.dispose();
 			}
 		};
 	}
@@ -68,8 +77,9 @@ public class GuiMakler extends Gui {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				dialogChange = new JDialog(_main);
 				JPanel paneChange = new JPanel();
-				dialog.add(paneChange);
+				dialogChange.add(paneChange);
 
 				final JComboBox<EstateAgent> makler = new JComboBox<EstateAgent>();
 				makler.setSize(300, 100);
@@ -81,12 +91,12 @@ public class GuiMakler extends Gui {
 				}
 
 				JButton changeButton = new JButton();
-				changeButton.setText("Delete the chosen estate agent");
+				changeButton.setText("Change the chosen estate agent");
 				changeButton.addActionListener(changeButtonListener(makler));
 				paneChange.add(changeButton);
 
-				dialog.setSize(500, 600);
-				dialog.setVisible(true);
+				dialogChange.setSize(500, 600);
+				dialogChange.setVisible(true);
 			}};
 	}
 	
@@ -96,9 +106,10 @@ public class GuiMakler extends Gui {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
+				dialogChange.dispose();
+				dialogChange = new JDialog(_main);
 				JPanel pane = new JPanel();
-				dialog.setSize(600, 500);
-				dialog.add(pane);
+
 				
 				//Aktueller Makler
 				EstateAgent current = (EstateAgent) makler.getSelectedItem();
@@ -114,22 +125,24 @@ public class GuiMakler extends Gui {
 				pane.add(adresse);
 				//Sein Login
 				pane.add(new JLabel("Login"));
-				String maklerLogin = current.getAddress();
+				String maklerLogin = current.getLogin();
 				final JTextField login = new JTextField(maklerLogin, 20);
 				pane.add(login);
 				//Sein Passwort
 				pane.add(new JLabel("Passwort"));
-				String maklerPasswort = current.getAddress();
+				String maklerPasswort = current.getPassword();
 				final JTextField passwort = new JTextField(maklerPasswort, 20);
 				pane.add(passwort);
 				//Button zum changen
 				JButton changeButton = new JButton();
-				changeButton.setText("Create Makler");
+				changeButton.setText("Change Makler");
 				changeButton.addActionListener(changeButtonListener(current, login, name, adresse, passwort));
 				pane.add(changeButton);
 				
-				dialog.setVisible(true);
 				pane.setVisible(true);
+				dialogChange.setSize(600, 500);
+				dialogChange.add(pane);
+				dialogChange.setVisible(true);
 			}
 		};
 	}
@@ -141,10 +154,9 @@ public class GuiMakler extends Gui {
 				public void actionPerformed(ActionEvent e) {
 					uch.fireEstateAgent(makler.getEstateAgentId());
 					uch.createAccount(login.getText(), name.getText(), adresse.getText(), passwort.getText());
-					JOptionPane.showMessageDialog(null, "Successfully created", "InfoBox: Create Makler",
+					JOptionPane.showMessageDialog(null, "Successfully changed", "InfoBox: Change Makler",
 							JOptionPane.INFORMATION_MESSAGE);
-					dialog.removeAll();
-					dialog.dispose();
+					dialogChange.dispose();
 				}
 			};
 		
@@ -154,8 +166,9 @@ public class GuiMakler extends Gui {
 		return new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				dialogDelete = new JDialog();
 				JPanel paneDelete = new JPanel();
-				dialog.add(paneDelete);
+				dialogDelete.add(paneDelete);
 
 				final JComboBox<EstateAgent> makler = new JComboBox<EstateAgent>();
 				makler.setSize(300, 100);
@@ -171,8 +184,8 @@ public class GuiMakler extends Gui {
 				deleteButton.addActionListener(deleteButtonListener(makler));
 				paneDelete.add(deleteButton);
 
-				dialog.setSize(500, 600);
-				dialog.setVisible(true);
+				dialogDelete.setSize(500, 600);
+				dialogDelete.setVisible(true);
 			}
 		};
 	}
@@ -184,8 +197,7 @@ public class GuiMakler extends Gui {
 			public void actionPerformed(ActionEvent e) {
 				EstateAgent gefeuert = (EstateAgent) makler.getSelectedItem();
 				uch.fireEstateAgent(gefeuert.getEstateAgentId());
-				dialog.removeAll();
-				dialog.dispose();
+				dialogDelete.dispose();
 			}
 		};
 	}

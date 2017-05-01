@@ -73,8 +73,20 @@ public class DummyHandler implements UseCaseHandler {
 
 	@Override
 	public void createAccount(String login, String maklerName, String address, String maklerPassword) {
-		// _makler.add(new EstateAgent(maklerName, address, login,
-		// maklerPassword));
+		int id = 0;
+		boolean check = true;
+		for (int i = 0; i < _makler.size(); ++i) {
+			for (EstateAgent agent : _makler) {
+				if (agent.getEstateAgentId() == id) {
+					check = false;
+				}
+			}
+			if (check) {
+				_makler.add(new EstateAgent(id, maklerName, address, login, maklerPassword));
+			} else {
+				check = true;
+			}
+		}
 	}
 
 	@Override
@@ -113,87 +125,117 @@ public class DummyHandler implements UseCaseHandler {
 	@Override
 	public void createApartment(int estateAgentId, String city, String postalCode, String street, String streetNumber,
 			double squareArea, int floor, int rent, int rooms, boolean hasBalcony, boolean builtInKitchen) {
-		throw new UnsupportedOperationException("Not supported yet."); // To
-																		// change
-																		// body
-																		// of
-																		// generated
-																		// methods,
-																		// choose
-																		// Tools
-																		// |
-																		// Templates.
+
+		boolean check = true;
+		for (int id = 1; id <= _immobilien.size(); ++id) {
+			for (Estate immobilie : _immobilien) {
+				if (immobilie.getEstateId() == id) {
+					check = false;
+				}
+			}
+			if (check) {
+				// FixMe Check if square area needs to be a double or int
+				// LOG
+				System.out.println("Vorher: " + _immobilien.size() + " / adding " + id);
+				_immobilien.add(new Apartment(id, estateAgentId, city, postalCode, street, streetNumber,
+						(int) squareArea, floor, rent, rooms, hasBalcony, builtInKitchen));
+				// LOG
+				System.out.println("Nachher: " + _immobilien.size());
+				return;
+			} else {
+				check = true;
+			}
+		}
 	}
 
 	@Override
 	public void createHouse(int estateAgentId, String city, String postalCode, String street, String streetNumber,
 			double squareArea, int floors, int price, boolean hasGarden) {
-		throw new UnsupportedOperationException("Not supported yet."); // To
-																		// change
-																		// body
-																		// of
-																		// generated
-																		// methods,
-																		// choose
-																		// Tools
-																		// |
-																		// Templates.
+		boolean check = true;
+		for (int id = 1; id <= _immobilien.size(); ++id) {
+			for (Estate immobilie : _immobilien) {
+				if (immobilie.getEstateId() == id) {
+					check = false;
+				}
+			}
+			if (check) {
+				// FixMe Check if square area needs to be a double or int
+				// LOG
+				System.out.println("Vorher: " + _immobilien.size() + " / adding " + id);
+				_immobilien.add(new House(id, estateAgentId, city, postalCode, street, streetNumber, (int) squareArea,
+						floors, price, hasGarden));
+				// LOG
+				System.out.println("Nachher: " + _immobilien.size());
+				return;
+			} else {
+				check = true;
+			}
+		}
 	}
 
 	@Override
 	public ArrayList<House> getHouses() {
-		throw new UnsupportedOperationException("Not supported yet."); // To
-																		// change
-																		// body
-																		// of
-																		// generated
-																		// methods,
-																		// choose
-																		// Tools
-																		// |
-																		// Templates.
+		ArrayList<House> haeuser = new ArrayList<House>();
+		for (Estate e : _immobilien) {
+			if (e instanceof House) {
+				haeuser.add((House) e);
+			}
+		}
+		return haeuser;
 	}
 
 	@Override
 	public ArrayList<Apartment> getApartments() {
-		throw new UnsupportedOperationException("Not supported yet."); // To
-																		// change
-																		// body
-																		// of
-																		// generated
-																		// methods,
-																		// choose
-																		// Tools
-																		// |
-																		// Templates.
+		ArrayList<Apartment> flats = new ArrayList<Apartment>();
+		for (Estate e : _immobilien) {
+			if (e instanceof Apartment) {
+				flats.add((Apartment) e);
+			}
+		}
+		return flats;
 	}
 
 	@Override
 	public void killHouse(int id) {
-		throw new UnsupportedOperationException("Not supported yet."); // To
-																		// change
-																		// body
-																		// of
-																		// generated
-																		// methods,
-																		// choose
-																		// Tools
-																		// |
-																		// Templates.
+		for (Estate e : _immobilien) {
+			if (e.getEstateId() == id) {
+				_immobilien.remove(e);
+				return;
+			}
+		}
 	}
 
 	@Override
 	public void killApartment(int id) {
-		throw new UnsupportedOperationException("Not supported yet."); // To
-																		// change
-																		// body
-																		// of
-																		// generated
-																		// methods,
-																		// choose
-																		// Tools
-																		// |
-																		// Templates.
+		for (Estate e : _immobilien) {
+			if (e.getEstateId() == id) {
+				// LOG
+				System.err.println("WOHNUNGSNOT VERSCHLIMMERT!!! :(");
+				_immobilien.remove(e);
+				// LOG
+				System.out.println("Wohnung ist weg ist " + _immobilien.contains(e));
+				return;
+			}
+		}
 	}
 
+	@Override
+	public ArrayList<Contract> getContracts() {
+		return _vertraege;
+	}
+
+	@Override
+	public void createContract(Contract c) {
+		_vertraege.add(c);
+	}
+
+	@Override
+	public void deleteContract(int contractID) {
+		for (Contract c : _vertraege) {
+			if (c.getContractNo() == contractID) {
+				_vertraege.remove(c);
+				return;
+			}
+		}
+	}
 }

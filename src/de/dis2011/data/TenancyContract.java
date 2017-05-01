@@ -49,4 +49,8 @@ public class TenancyContract extends Contract {
 		this.additionalCosts = additionalCosts;
 	}
 
+	public String toString() {
+		return "Vermietung " + getPlace() + ", den" + getDate();
+	}
+
 }
